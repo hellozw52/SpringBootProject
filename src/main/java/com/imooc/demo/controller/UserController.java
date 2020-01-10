@@ -1,40 +1,32 @@
 package com.imooc.demo.controller;
 
 import com.imooc.demo.config.Application;
-import com.imooc.demo.dto.UserDto;
-import com.imooc.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-    @Resource
-    private UserService userService;
-
     @RequestMapping("/login")
-    public String login(UserDto userDto) {
-        LOG.info("登录开始, {}", userDto.toString());
+    public String login(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password) {
 
-        Map<String, String> map = new HashMap<>();
-        map.put("", "");
-        map.put("", "");
-        map.put("", "");
-        map.put("", "");
+        LOG.info("登录开始, {}", username+"  "+password);
 
-        // todo 调用service方法
-        userDto = userService.doLogin(userDto);
+        //调用service方法
+        Map<String,Object> user = userService.doLogin(username,password);
 
-        if (userDto == null) {
+        if (user == null) {
             LOG.warn("用户或密码错");
             return "用户或密码错";
         } else {
@@ -44,10 +36,10 @@ public class UserController {
     }
 
     @RequestMapping("/list")
-    public String list() {
+    public List<Map<String,Object>> list() {
         LOG.info("查询开始");
-        userService.list();
-        return "success";
+        listMap = userService.list();
+        return listMap;
     }
 
 }

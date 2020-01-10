@@ -1,14 +1,15 @@
 package com.imooc.demo.mapper;
 
 
-import com.imooc.demo.domain.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
 
-    List<User> findByLoginName(String loginName);
+    List<Map<String,Object>> doLogin(@Param("username") String username,@Param("password") String password);
 
-    List<User> list();
+    List<Map<String,Object>> list();
 
 }
