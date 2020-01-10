@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 用户控制器
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController extends BaseController{
@@ -35,6 +38,10 @@ public class UserController extends BaseController{
         }
     }
 
+    /**
+     * 查询所有用户
+     * @return
+     */
     @RequestMapping("/list")
     public List<Map<String,Object>> list() {
         LOG.info("查询开始");

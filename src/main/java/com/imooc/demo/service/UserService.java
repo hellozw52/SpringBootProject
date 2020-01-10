@@ -36,9 +36,6 @@ public class UserService {
         }
     }
 
-    /**
-     * @return
-     */
     public List<Map<String,Object>> list() {
         List<Map<String,Object>> allUser = userMapper.list();
         return allUser;
