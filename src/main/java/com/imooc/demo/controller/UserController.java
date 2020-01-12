@@ -1,6 +1,7 @@
 package com.imooc.demo.controller;
 
 import com.imooc.demo.config.Application;
+import com.imooc.demo.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,34 +20,46 @@ public class UserController extends BaseController{
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-    @RequestMapping("/login")
-    public String login(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password) {
 
-        LOG.info("登录开始, {}", username+"  "+password);
-
-        //调用service方法
-        Map<String,Object> user = userService.doLogin(username,password);
-
-        if (user == null) {
-            LOG.warn("用户或密码错");
-            return "用户或密码错";
-        } else {
-            LOG.info("登录成功");
-            return "登录成功";
-        }
-    }
+/**
+ * 查询所有用户
+ * @return
+ */
+@RequestMapping("/list")
+public List<User> list() {
+    LOG.info("查询开始");
+    List<User> allUser = userService.list();
+    return allUser;
+}
 
     /**
-     * 查询所有用户
+     * 新增
      * @return
      */
-    @RequestMapping("/list")
-    public List<Map<String,Object>> list() {
-        LOG.info("查询开始");
-        listMap = userService.list();
-        return listMap;
+    @RequestMapping("/add")
+    public void add(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password
+    ) {
+        User user=new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        userService.insertUser(user);
     }
+
+/**
+ * 修改
+ * @return
+ */
+@RequestMapping("/update")
+public void update(
+        @RequestParam("username") String username,
+        @RequestParam("password") String password
+) {
+    User user=new User();
+    user.setUsername(username);
+    user.setPassword(password);
+    userService.insertUser(user);
+}
 
 }

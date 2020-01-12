@@ -24,7 +24,6 @@ public class BaseController {
     @Resource
     protected UserService userService;
 
-
     //getter setter
     public Map<String, Object> getMap() {
         return map;

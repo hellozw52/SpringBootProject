@@ -20,24 +20,11 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
-    /**
-     * 登录功能
-     * @return
-     */
-        public Map<String,Object> doLogin(String username,String password) {
-        List<Map<String,Object>> userList = userMapper.doLogin(username,password);
-        if (CollectionUtils.isEmpty(userList)) {
-            LOG.info("根据用户名查找不到记录");
-            return null;
-        } else {
-            Map<String,Object> user = userList.get(0);
-            LOG.info("根据用户名查找结果：{}", user);
-            return user;
-        }
+    public List<User> list() {
+        return userMapper.selectAll();
     }
 
-    public List<Map<String,Object>> list() {
-        List<Map<String,Object>> allUser = userMapper.list();
-        return allUser;
+    public void insertUser(User user) {
+        userMapper.insertUser(user);
     }
 }
