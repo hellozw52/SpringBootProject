@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+
+import static com.imooc.demo.tool.FieldTool.formatHumpNameForList;
 
 @Service
 public class UserService {
@@ -35,5 +38,10 @@ public class UserService {
 
     public User getOne(int id) {
         return userMapper.selectByPrimaryKey(id);
+    }
+
+    public List<Map<String, Object>> listByListMap() {
+        //转为驼峰命名
+        return formatHumpNameForList(userMapper.listByListMap());
     }
 }

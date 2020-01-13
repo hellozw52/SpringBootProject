@@ -8,22 +8,19 @@
     <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
     <result column="login_state" jdbcType="VARCHAR" property="loginState" />
   </resultMap>
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from login_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-
   <insert id="insert" parameterType="com.imooc.demo.domain.LoginInfo">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into login_info (username, login_ip, login_time, 
+    insert into login_info (username, login_ip, login_time,
       login_state)
-    values (#{username,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, 
+    values (#{username,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP},
       #{loginState,jdbcType=VARCHAR})
   </insert>
-
   <update id="updateByPrimaryKey" parameterType="com.imooc.demo.domain.LoginInfo">
     update login_info
     set username = #{username,jdbcType=VARCHAR},
@@ -32,13 +29,11 @@
       login_state = #{loginState,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, username, login_ip, login_time, login_state
     from login_info
     where id = #{id,jdbcType=INTEGER}
   </select>
-
   <select id="selectAll" resultMap="BaseResultMap">
     select id, username, login_ip, login_time, login_state
     from login_info

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户控制器
@@ -70,6 +71,16 @@ public class UserController extends BaseController {
         LOG.info("查询开始");
         List<User> allUser = userService.list();
         return allUser;
+    }
+
+    /**
+     * 查询所有用户 listMap方式
+     */
+    @RequestMapping("/listByListMap")
+    public List<Map<String,Object>> listByListMap() {
+        LOG.info("查询开始");
+        listMap = userService.listByListMap();
+        return listMap;
     }
 
     /**
