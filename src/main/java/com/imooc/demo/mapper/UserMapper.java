@@ -1,11 +1,11 @@
 package com.imooc.demo.mapper;
 
 import com.imooc.demo.domain.User;
+
 import java.util.List;
 import java.util.Map;
 
 public interface UserMapper {
-
     int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
@@ -16,5 +16,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    List<Map<String, Object>> listByListMap();
+    List<Map<String,Object>> listByListMap();
 }

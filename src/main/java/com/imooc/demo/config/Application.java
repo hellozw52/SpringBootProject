@@ -5,13 +5,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
 @ComponentScan("com")
 @MapperScan("com.imooc.demo.mapper")
-public class Application {
+public class Application extends SpringBootServletInitializer {
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
@@ -21,6 +23,11 @@ public class Application {
         System.out.println("启动成功！！");
         System.out.println("根地址: \t\thttp://127.0.0.1:" + env.getProperty("server.port"));
         System.out.println("登录接口: \thttp://127.0.0.1:" + env.getProperty("server.port") + "/user/login?username=zhaowei&password=123456");
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder){
+        return builder.sources(Application.class);
     }
 
 }
