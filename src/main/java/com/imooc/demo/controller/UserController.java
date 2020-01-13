@@ -74,7 +74,7 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 查询所有用户 listMap方式
+     * 查询所有用户 listMap方式  转为驼峰命名
      */
     @RequestMapping("/listByListMap")
     public List<Map<String,Object>> listByListMap() {
