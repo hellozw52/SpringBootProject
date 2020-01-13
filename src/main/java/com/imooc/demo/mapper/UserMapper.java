@@ -1,26 +1,17 @@
 package com.imooc.demo.mapper;
 
-
 import com.imooc.demo.domain.User;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
-import java.util.Map;
 
 public interface UserMapper {
 
-    //查询所有用户
-    public List<User> selectAll();
+    int deleteByPrimaryKey(Integer id);
 
-    //查询一个用户
-    public User selectById(Integer id);
+    int insert(User record);
 
-    //添加用户
-    public int insertUser(User user);
+    User selectByPrimaryKey(Integer id);
 
-    //修改用户
-    public int updateUser(User user);
+    List<User> selectAll();
 
-    //删除用户
-    public int deleteUser(Integer id);
+    int updateByPrimaryKey(User record);
 }

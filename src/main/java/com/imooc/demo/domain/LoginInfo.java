@@ -1,24 +1,18 @@
 package com.imooc.demo.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
+public class LoginInfo implements Serializable {
     private Integer id;
 
     private String username;
 
-    private String password;
+    private String loginIp;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(
-            pattern = "yyyy-MM-dd HH:mm:ss",
-            timezone = "GMT+8"
-    )
-    private Date registerTime;
+    private Date loginTime;
+
+    private String loginState;
 
     private static final long serialVersionUID = 1L;
 
@@ -38,20 +32,28 @@ public class User implements Serializable {
         this.username = username == null ? null : username.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getLoginIp() {
+        return loginIp;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setLoginIp(String loginIp) {
+        this.loginIp = loginIp == null ? null : loginIp.trim();
     }
 
-    public Date getRegisterTime() {
-        return registerTime;
+    public Date getLoginTime() {
+        return loginTime;
     }
 
-    public void setRegisterTime(Date registerTime) {
-        this.registerTime = registerTime;
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public String getLoginState() {
+        return loginState;
+    }
+
+    public void setLoginState(String loginState) {
+        this.loginState = loginState == null ? null : loginState.trim();
     }
 
     @Override
@@ -62,8 +64,9 @@ public class User implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
-        sb.append(", registerTime=").append(registerTime);
+        sb.append(", loginIp=").append(loginIp);
+        sb.append(", loginTime=").append(loginTime);
+        sb.append(", loginState=").append(loginState);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

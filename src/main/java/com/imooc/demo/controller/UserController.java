@@ -8,58 +8,80 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 用户控制器
  */
 @RestController
 @RequestMapping("/user")
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-
-/**
- * 查询所有用户
- * @return
- */
-@RequestMapping("/list")
-public List<User> list() {
-    LOG.info("查询开始");
-    List<User> allUser = userService.list();
-    return allUser;
-}
-
     /**
      * 新增
-     * @return
      */
     @RequestMapping("/add")
     public void add(
             @RequestParam("username") String username,
             @RequestParam("password") String password
     ) {
-        User user=new User();
+        User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        userService.insertUser(user);
+        user.setRegisterTime(new Date());
+        userService.insert(user);
     }
 
-/**
- * 修改
- * @return
- */
-@RequestMapping("/update")
-public void update(
-        @RequestParam("username") String username,
-        @RequestParam("password") String password
-) {
-    User user=new User();
-    user.setUsername(username);
-    user.setPassword(password);
-    userService.insertUser(user);
-}
+    /**
+     * 删除
+     */
+    @RequestMapping("/delete")
+    public void delete(
+            @RequestParam("id") int id
+    ) {
+        userService.delete(id);
+    }
+
+    /**
+     * 修改
+     */
+    @RequestMapping("/update")
+    public void update(
+            @RequestParam("id") int id,
+            @RequestParam("username") String username,
+            @RequestParam("password") String password
+    ) {
+        User user = new User();
+        user.setId(id);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setRegisterTime(new Date());
+        userService.update(user);
+    }
+
+    /**
+     * 查询所有用户
+     */
+    @RequestMapping("/list")
+    public List<User> list() {
+        LOG.info("查询开始");
+        List<User> allUser = userService.list();
+        return allUser;
+    }
+
+    /**
+     * 查询单个用户
+     */
+    @RequestMapping("/getOne")
+    public User getOne(
+        @RequestParam("id") int id
+    ) {
+        LOG.info("查询开始");
+        User oneUser = userService.getOne(id);
+        return oneUser;
+    }
 
 }

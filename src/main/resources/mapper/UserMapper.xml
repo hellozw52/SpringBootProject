@@ -1,32 +1,45 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.imooc.demo.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.imooc.demo.domain.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+  </resultMap>
 
-    <!-- 查询数据表中的所有记录，并封装User对象集合 -->
-    <select id="selectAll" resultType="com.imooc.demo.domain.User">
-       select * from t_user
-    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
 
-    <!-- 根据id查询数据表中的一条记录，并封装User对象 -->
-    <select id="selectById" resultType="com.imooc.demo.domain.User">
-     select t_id as id,t_username as username,t_password password from t_user where t_id=#{id};
-    </select>
+  <insert id="insert" parameterType="com.imooc.demo.domain.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user (username, `password`, register_time
+      )
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
 
-    <!-- 添加用户 -->
-    <insert id="insertUser">
-      insert into t_user (t_username,t_password)
-      values (#{username},#{password})
-    </insert>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.demo.domain.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 
-    <!-- 更新用户 -->
-    <update id="updateUser">
-         update t_user set t_username=#{username},t_password=#{password}
-         where t_id=#{id}
-    </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, username, `password`, register_time
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
 
-    <!-- 删除用户 -->
-    <delete id="deleteUser">
-      delete from t_user where t_id=#{id}
-    </delete>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, username, `password`, register_time
+    from user
+  </select>
 
 </mapper>
