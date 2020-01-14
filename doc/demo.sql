@@ -10,27 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2020-01-13 11:32:45
+Date: 2020-01-14 17:09:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for `login_info`
--- ----------------------------
-DROP TABLE IF EXISTS `login_info`;
-CREATE TABLE `login_info` (
-  `id` int(20) NOT NULL DEFAULT '0',
-  `username` varchar(20) DEFAULT NULL COMMENT '账号',
-  `login_ip` varchar(30) DEFAULT NULL COMMENT '登录ip',
-  `login_time` datetime DEFAULT NULL COMMENT '登录时间',
-  `login_state` varchar(10) DEFAULT NULL COMMENT '登录状态',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of login_info
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `user`
