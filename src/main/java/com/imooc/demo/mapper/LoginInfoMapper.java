@@ -4,6 +4,7 @@ import com.imooc.demo.domain.LoginInfo;
 import java.util.List;
 
 public interface LoginInfoMapper {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(LoginInfo record);

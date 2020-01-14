@@ -75,8 +75,8 @@
                     <configurationFile>src/main/resources/mybatis-generator/generatorConfig.xml</configurationFile>
                     <!-- 在控制台打印执行日志 -->
                     <verbose>true</verbose>
-                    <!-- 重复生成时不覆盖之前的文件-->
-                    <overwrite>false</overwrite>
+                    <!-- 重复生成时覆盖之前的文件-->
+                    <overwrite>true</overwrite>
                 </configuration>
                 <executions>
                     <execution>
