@@ -65,7 +65,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!--添加mybatis generator maven插件-->
+            <!--添加mybatis generator反向工程-->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -73,8 +73,10 @@
                 <configuration>
                     <!--generatorConfig.xml位置-->
                     <configurationFile>src/main/resources/mybatis-generator/generatorConfig.xml</configurationFile>
+                    <!-- 在控制台打印执行日志 -->
                     <verbose>true</verbose>
-                    <overwrite>true</overwrite>
+                    <!-- 重复生成时不覆盖之前的文件-->
+                    <overwrite>false</overwrite>
                 </configuration>
                 <executions>
                     <execution>

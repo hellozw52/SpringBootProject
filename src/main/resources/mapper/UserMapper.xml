@@ -7,10 +7,12 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
   </resultMap>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.imooc.demo.domain.User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
@@ -20,6 +22,7 @@
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}
       )
   </insert>
+
   <update id="updateByPrimaryKey" parameterType="com.imooc.demo.domain.User">
     update user
     set username = #{username,jdbcType=VARCHAR},
@@ -27,11 +30,13 @@
       register_time = #{registerTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, username, `password`, register_time
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <select id="selectAll" resultMap="BaseResultMap">
     select id, username, `password`, register_time
     from user
