@@ -16,13 +16,16 @@ import java.util.Map;
  */
 public class BaseController {
 
-    // 封装显示的数据
+    // 封装常用数据  map listMap listNum
     protected Map<String, Object> map;
     protected List<Map<String,Object>> listMap;
+    protected int listNum;
 
     // 待注入的service对象
     @Resource
     protected UserService userService;
+    @Resource
+    protected AliTradingRecordService aliTradingRecordService;
 
     //getter setter
     public Map<String, Object> getMap() {

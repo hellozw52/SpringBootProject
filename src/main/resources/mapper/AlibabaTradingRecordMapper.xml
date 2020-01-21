@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.demo.mapper.AlibabaTradingRecordMapper">
+  <resultMap id="BaseResultMap" type="com.imooc.demo.domain.AlibabaTradingRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="trade_number" jdbcType="VARCHAR" property="tradeNumber" />
+    <result column="outer_trade_number" jdbcType="VARCHAR" property="outerTradeNumber" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="trade_source" jdbcType="VARCHAR" property="tradeSource" />
+    <result column="trade_state" jdbcType="VARCHAR" property="tradeState" />
+    <result column="buyer_id" jdbcType="VARCHAR" property="buyerId" />
+    <result column="buyer_login_number" jdbcType="VARCHAR" property="buyerLoginNumber" />
+    <result column="buyer_name" jdbcType="VARCHAR" property="buyerName" />
+    <result column="buyer_nickname" jdbcType="VARCHAR" property="buyerNickname" />
+    <result column="seller_id" jdbcType="VARCHAR" property="sellerId" />
+    <result column="seller_login_number" jdbcType="VARCHAR" property="sellerLoginNumber" />
+    <result column="seller_name" jdbcType="VARCHAR" property="sellerName" />
+    <result column="seller_nickname" jdbcType="VARCHAR" property="sellerNickname" />
+    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+    <result column="trade_total_amount" jdbcType="DECIMAL" property="tradeTotalAmount" />
+    <result column="pay_mode" jdbcType="VARCHAR" property="payMode" />
+    <result column="trade_create_ip" jdbcType="VARCHAR" property="tradeCreateIp" />
+    <result column="trade_pay_ip" jdbcType="VARCHAR" property="tradePayIp" />
+    <result column="confirm_receive_ip" jdbcType="VARCHAR" property="confirmReceiveIp" />
+    <result column="buyer_pay_date" jdbcType="TIMESTAMP" property="buyerPayDate" />
+    <result column="confirm_pay_date" jdbcType="TIMESTAMP" property="confirmPayDate" />
+    <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+    <result column="receiver_phone" jdbcType="VARCHAR" property="receiverPhone" />
+    <result column="receiver_fixed_phone" jdbcType="VARCHAR" property="receiverFixedPhone" />
+    <result column="receiver_address" jdbcType="VARCHAR" property="receiverAddress" />
+    <result column="case_number" jdbcType="VARCHAR" property="caseNumber" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from alibaba_trading_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.demo.domain.AlibabaTradingRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into alibaba_trading_record (user_id, trade_number, outer_trade_number, 
+      create_date, trade_source, trade_state, 
+      buyer_id, buyer_login_number, buyer_name, 
+      buyer_nickname, seller_id, seller_login_number, 
+      seller_name, seller_nickname, commodity_name, 
+      trade_total_amount, pay_mode, trade_create_ip, 
+      trade_pay_ip, confirm_receive_ip, buyer_pay_date, 
+      confirm_pay_date, receiver_name, receiver_phone, 
+      receiver_fixed_phone, receiver_address, case_number
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{tradeNumber,jdbcType=VARCHAR}, #{outerTradeNumber,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{tradeSource,jdbcType=VARCHAR}, #{tradeState,jdbcType=VARCHAR}, 
+      #{buyerId,jdbcType=VARCHAR}, #{buyerLoginNumber,jdbcType=VARCHAR}, #{buyerName,jdbcType=VARCHAR}, 
+      #{buyerNickname,jdbcType=VARCHAR}, #{sellerId,jdbcType=VARCHAR}, #{sellerLoginNumber,jdbcType=VARCHAR}, 
+      #{sellerName,jdbcType=VARCHAR}, #{sellerNickname,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, 
+      #{tradeTotalAmount,jdbcType=DECIMAL}, #{payMode,jdbcType=VARCHAR}, #{tradeCreateIp,jdbcType=VARCHAR}, 
+      #{tradePayIp,jdbcType=VARCHAR}, #{confirmReceiveIp,jdbcType=VARCHAR}, #{buyerPayDate,jdbcType=TIMESTAMP}, 
+      #{confirmPayDate,jdbcType=TIMESTAMP}, #{receiverName,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=VARCHAR}, 
+      #{receiverFixedPhone,jdbcType=VARCHAR}, #{receiverAddress,jdbcType=VARCHAR}, #{caseNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.demo.domain.AlibabaTradingRecord">
+    update alibaba_trading_record
+    set user_id = #{userId,jdbcType=VARCHAR},
+      trade_number = #{tradeNumber,jdbcType=VARCHAR},
+      outer_trade_number = #{outerTradeNumber,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      trade_source = #{tradeSource,jdbcType=VARCHAR},
+      trade_state = #{tradeState,jdbcType=VARCHAR},
+      buyer_id = #{buyerId,jdbcType=VARCHAR},
+      buyer_login_number = #{buyerLoginNumber,jdbcType=VARCHAR},
+      buyer_name = #{buyerName,jdbcType=VARCHAR},
+      buyer_nickname = #{buyerNickname,jdbcType=VARCHAR},
+      seller_id = #{sellerId,jdbcType=VARCHAR},
+      seller_login_number = #{sellerLoginNumber,jdbcType=VARCHAR},
+      seller_name = #{sellerName,jdbcType=VARCHAR},
+      seller_nickname = #{sellerNickname,jdbcType=VARCHAR},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      trade_total_amount = #{tradeTotalAmount,jdbcType=DECIMAL},
+      pay_mode = #{payMode,jdbcType=VARCHAR},
+      trade_create_ip = #{tradeCreateIp,jdbcType=VARCHAR},
+      trade_pay_ip = #{tradePayIp,jdbcType=VARCHAR},
+      confirm_receive_ip = #{confirmReceiveIp,jdbcType=VARCHAR},
+      buyer_pay_date = #{buyerPayDate,jdbcType=TIMESTAMP},
+      confirm_pay_date = #{confirmPayDate,jdbcType=TIMESTAMP},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+      receiver_fixed_phone = #{receiverFixedPhone,jdbcType=VARCHAR},
+      receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      case_number = #{caseNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, user_id, trade_number, outer_trade_number, create_date, trade_source, 
+    trade_state, buyer_id, buyer_login_number, buyer_name, buyer_nickname, seller_id, 
+    seller_login_number, seller_name, seller_nickname, commodity_name, trade_total_amount, 
+    pay_mode, trade_create_ip, trade_pay_ip, confirm_receive_ip, buyer_pay_date, confirm_pay_date, 
+    receiver_name, receiver_phone, receiver_fixed_phone, receiver_address, case_number
+    from alibaba_trading_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_id, trade_number, outer_trade_number, create_date, trade_source, 
+    trade_state, buyer_id, buyer_login_number, buyer_name, buyer_nickname, seller_id, 
+    seller_login_number, seller_name, seller_nickname, commodity_name, trade_total_amount, 
+    pay_mode, trade_create_ip, trade_pay_ip, confirm_receive_ip, buyer_pay_date, confirm_pay_date, 
+    receiver_name, receiver_phone, receiver_fixed_phone, receiver_address, case_number
+    from alibaba_trading_record
+  </select>
+
+    <select id="getTradRecordCondition" resultType="java.util.Map">
+      SELECT
+      *
+      FROM
+      alibaba_trading_record atr
+      WHERE
+      atr.user_id = #{userId}
+      AND atr.commodity_name LIKE  CONCAT('%',#{commodityName},'%')
+      AND atr.seller_name LIKE CONCAT('%',#{sellerName},'%')
+      AND atr.trade_state LIKE CONCAT('%',#{tradeState},'%')
+      AND atr.pay_mode LIKE CONCAT('%',#{payMode},'%')
+      AND atr.trade_total_amount <![CDATA[ >= ]]> #{tradeTotalAmountStart}
+      AND atr.trade_total_amount <![CDATA[ <= ]]> #{tradeTotalAmountEnd}
+      AND atr.buyer_pay_date BETWEEN STR_TO_DATE(
+      #{startTime},
+      '%Y-%m-%d'
+      )
+      AND DATE_ADD(
+      STR_TO_DATE(
+      #{endTime},
+      '%Y-%m-%d'
+      ),
+      INTERVAL 1 DAY
+      )
+
+      <if test="weekNum != null and weekNum.length >0">
+        AND DATE_FORMAT(atr.create_date, '%w') in
+        (#{weekNum})
+      </if>
+
+      AND STR_TO_DATE(
+      substring(atr.create_date, 12),
+      '%H:%i:%s'
+      ) <![CDATA[ >= ]]> STR_TO_DATE(#{startDuration}, '%H:%i:%s')
+      AND STR_TO_DATE(
+      substring(atr.create_date, 12),
+      '%H:%i:%s'
+      ) <![CDATA[ <= ]]> STR_TO_DATE(#{endDuration}, '%H:%i:%s')
+      ORDER BY ${sort}  ${order}
+      LIMIT ${start},${size};
+
+
+    </select>
+
+  <select id="getTradRecordConditionTotalNum" resultType="java.util.Map">
+      SELECT
+       *
+      FROM
+      alibaba_trading_record atr
+      WHERE
+      atr.user_id = #{userId}
+      AND atr.commodity_name LIKE  CONCAT('%',#{commodityName},'%')
+      AND atr.seller_name LIKE CONCAT('%',#{sellerName},'%')
+      AND atr.trade_state LIKE CONCAT('%',#{tradeState},'%')
+      AND atr.pay_mode LIKE CONCAT('%',#{payMode},'%')
+      AND atr.trade_total_amount <![CDATA[ >= ]]> #{tradeTotalAmountStart}
+      AND atr.trade_total_amount <![CDATA[ <= ]]> #{tradeTotalAmountEnd}
+      AND atr.buyer_pay_date BETWEEN STR_TO_DATE(
+      #{startTime},
+      '%Y-%m-%d'
+      )
+      AND DATE_ADD(
+      STR_TO_DATE(
+      #{endTime},
+      '%Y-%m-%d'
+      ),
+      INTERVAL 1 DAY
+      )
+
+      <if test="weekNum != null and weekNum.length >0">
+        AND DATE_FORMAT(atr.create_date, '%w') in
+        (#{weekNum})
+      </if>
+
+      AND STR_TO_DATE(
+      substring(atr.create_date, 12),
+      '%H:%i:%s'
+      ) <![CDATA[ >= ]]> STR_TO_DATE(#{startDuration}, '%H:%i:%s')
+      AND STR_TO_DATE(
+      substring(atr.create_date, 12),
+      '%H:%i:%s'
+      ) <![CDATA[ <= ]]> STR_TO_DATE(#{endDuration}, '%H:%i:%s')
+      ORDER BY ${sort}  ${order};
+
+  </select>
+</mapper>
