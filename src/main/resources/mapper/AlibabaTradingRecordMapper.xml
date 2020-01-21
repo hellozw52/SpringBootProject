@@ -194,4 +194,10 @@
       ORDER BY ${sort}  ${order};
 
   </select>
+
+  <select id="normalQuery" resultType="java.util.Map">
+
+    SELECT * FROM alibaba_trading_record atr WHERE atr.user_id = #{userId} AND atr.commodity_name LIKE '%${commodityName}%';
+
+  </select>
 </mapper>

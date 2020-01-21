@@ -1,12 +1,12 @@
 package com.imooc.demo.controller;
 
-import com.imooc.demo.tool.FieldTool;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -55,6 +55,18 @@ public class AliTradingRecordController extends BaseController {
 
         // 返回json数据
         return map;
+    }
+
+    /**
+     * 交易记录条件查询   参数较少，直接传参
+     */
+    @RequestMapping("/normalQuery")
+    public List<Map<String,Object>> normalQuery(
+            @RequestParam("userId") String userId,
+            @RequestParam(value = "commodityName",required = false) String commodityName
+    ) {
+        listMap = aliTradingRecordService.normalQuery(userId,commodityName);
+        return listMap;
     }
 
 

@@ -118,4 +118,8 @@ public class AliTradingRecordService {
 
         return alibabaTradingRecordMapper.getTradRecordConditionTotalNum(params).size();
     }
+
+    public List<Map<String, Object>> normalQuery(String userId, String commodityName) {
+        return FieldTool.formatHumpNameForList(alibabaTradingRecordMapper.normalQuery(userId,commodityName));
+    }
 }
