@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +47,26 @@ public class AliTradingRecordService {
             endDuration = "23:59:59";
         }
 
-        return FieldTool.formatHumpNameForList(alibabaTradingRecordMapper.getTradRecordCondition(userId,commodityName,sellerName,tradeState,payMode,tradeTotalAmountStart,tradeTotalAmountEnd,startTime,endTime,weekNum,startDuration,endDuration,sort,order,start,size));
+        //参数全部准备完毕，放入map中，传参
+        Map<String,Object> params = new HashMap<>();
+        params.put("userId", userId);
+        params.put("commodityName", commodityName);
+        params.put("sellerName", sellerName);
+        params.put("tradeState", tradeState);
+        params.put("payMode", payMode);
+        params.put("tradeTotalAmountStart", tradeTotalAmountStart);
+        params.put("tradeTotalAmountEnd", tradeTotalAmountEnd);
+        params.put("startTime", startTime);
+        params.put("endTime", endTime);
+        params.put("weekNum",weekNum);
+        params.put("startDuration", startDuration);
+        params.put("endDuration",endDuration);
+        params.put("sort", sort);
+        params.put("order",order);
+        params.put("start", start);
+        params.put("size", size);
+
+        return FieldTool.formatHumpNameForList(alibabaTradingRecordMapper.getTradRecordCondition(params));
     }
 
     public int getTradRecordConditionTotalNum(String userId, String commodityName, String sellerName, String tradeState, String payMode, String tradeTotalAmountStart, String tradeTotalAmountEnd, String startTime, String endTime, String weekNum, String startDuration, String endDuration,String sort,String order) throws ParseException {
@@ -79,6 +99,23 @@ public class AliTradingRecordService {
             endDuration = "23:59:59";
         }
 
-        return alibabaTradingRecordMapper.getTradRecordConditionTotalNum(userId,commodityName,sellerName,tradeState,payMode,tradeTotalAmountStart,tradeTotalAmountEnd,startTime,endTime,weekNum,startDuration,endDuration,sort,order).size();
+        //参数全部准备完毕，放入map中，传参
+        Map<String,Object> params = new HashMap<>();
+        params.put("userId", userId);
+        params.put("commodityName", commodityName);
+        params.put("sellerName", sellerName);
+        params.put("tradeState", tradeState);
+        params.put("payMode", payMode);
+        params.put("tradeTotalAmountStart", tradeTotalAmountStart);
+        params.put("tradeTotalAmountEnd", tradeTotalAmountEnd);
+        params.put("startTime", startTime);
+        params.put("endTime", endTime);
+        params.put("weekNum",weekNum);
+        params.put("startDuration", startDuration);
+        params.put("endDuration",endDuration);
+        params.put("sort", sort);
+        params.put("order",order);
+
+        return alibabaTradingRecordMapper.getTradRecordConditionTotalNum(params).size();
     }
 }

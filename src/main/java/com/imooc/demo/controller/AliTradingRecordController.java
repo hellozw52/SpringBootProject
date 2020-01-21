@@ -17,7 +17,7 @@ import java.util.Map;
 public class AliTradingRecordController extends BaseController {
 
     /**
-     * 交易记录条件查询
+     * 交易记录条件查询   参数较多时，使用map传参
      */
     @RequestMapping("/queryResult")
     public Map<String,Object> queryResult(
@@ -42,7 +42,7 @@ public class AliTradingRecordController extends BaseController {
         int start = Integer.parseInt((page == null || page == "0") ? "1" : page) - 1;// 开始位置
         int size = Integer.parseInt((rows == null || rows == "0") ? "15" : rows);// 每页个数
 
-        // 参数不为空，即查询！
+        // 将参数全部传递至service层进行整理、入map
         if ((commodityName != "") || (sellerName != "") || (tradeState != "") || (tradeState != "") || (payMode != "") || (tradeTotalAmountStart != "")
             || (tradeTotalAmountEnd != "") || (startTime != "") || (endTime != "") || (weekNum != "")|| (startDuration != "") || (endDuration != "")) {
             listMap = aliTradingRecordService.getTradRecordCondition(userId,commodityName,sellerName,tradeState,payMode,tradeTotalAmountStart,tradeTotalAmountEnd,startTime,endTime,weekNum,startDuration,endDuration,sort,order,start,size);

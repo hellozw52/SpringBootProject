@@ -16,10 +16,10 @@ import java.util.Map;
  */
 public class BaseController {
 
-    // 封装常用数据  map listMap listNum
-    protected Map<String, Object> map;
-    protected List<Map<String,Object>> listMap;
-    protected int listNum;
+    // 封装常用数据
+    protected Map<String, Object> map; //一条记录
+    protected List<Map<String,Object>> listMap; //多条记录
+    protected int listNum;//记录个数
 
     // 待注入的service对象
     @Resource
@@ -42,5 +42,13 @@ public class BaseController {
 
     public void setListMap(List<Map<String, Object>> listMap) {
         this.listMap = listMap;
+    }
+
+    public int getListNum() {
+        return listNum;
+    }
+
+    public void setListNum(int listNum) {
+        this.listNum = listNum;
     }
 }

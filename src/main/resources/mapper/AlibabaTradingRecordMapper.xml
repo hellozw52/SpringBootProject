@@ -109,7 +109,7 @@
     from alibaba_trading_record
   </select>
 
-    <select id="getTradRecordCondition" resultType="java.util.Map">
+    <select id="getTradRecordCondition" parameterType="java.util.Map" resultType="java.util.Map">
       SELECT
       *
       FROM
@@ -136,7 +136,7 @@
 
       <if test="weekNum != null and weekNum.length >0">
         AND DATE_FORMAT(atr.create_date, '%w') in
-        (#{weekNum})
+        (${weekNum})
       </if>
 
       AND STR_TO_DATE(
@@ -153,7 +153,7 @@
 
     </select>
 
-  <select id="getTradRecordConditionTotalNum" resultType="java.util.Map">
+  <select id="getTradRecordConditionTotalNum" parameterType="java.util.Map" resultType="java.util.Map">
       SELECT
        *
       FROM
@@ -180,7 +180,7 @@
 
       <if test="weekNum != null and weekNum.length >0">
         AND DATE_FORMAT(atr.create_date, '%w') in
-        (#{weekNum})
+        (${weekNum})
       </if>
 
       AND STR_TO_DATE(
