@@ -40,7 +40,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #mybatis sql打印输出功能  测试时打开
 
 #日志
 logging:
