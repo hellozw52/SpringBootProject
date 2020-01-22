@@ -116,10 +116,10 @@
       alibaba_trading_record atr
       WHERE
       atr.user_id = #{userId}
-      AND atr.commodity_name LIKE  CONCAT('%',#{commodityName},'%')
-      AND atr.seller_name LIKE CONCAT('%',#{sellerName},'%')
-      AND atr.trade_state LIKE CONCAT('%',#{tradeState},'%')
-      AND atr.pay_mode LIKE CONCAT('%',#{payMode},'%')
+      AND atr.commodity_name LIKE  '%${commodityName}%'
+      AND atr.seller_name LIKE  '%${sellerName}%'
+      AND atr.trade_state LIKE  '%${tradeState}%'
+      AND atr.pay_mode LIKE  '%${payMode}%'
       AND atr.trade_total_amount <![CDATA[ >= ]]> #{tradeTotalAmountStart}
       AND atr.trade_total_amount <![CDATA[ <= ]]> #{tradeTotalAmountEnd}
       AND atr.buyer_pay_date BETWEEN STR_TO_DATE(
@@ -153,17 +153,17 @@
 
     </select>
 
-  <select id="getTradRecordConditionTotalNum" parameterType="java.util.Map" resultType="java.util.Map">
+  <select id="getTradRecordConditionTotalNum" parameterType="java.util.Map" resultType="Integer">
       SELECT
-       *
+        count(*)
       FROM
       alibaba_trading_record atr
       WHERE
       atr.user_id = #{userId}
-      AND atr.commodity_name LIKE  CONCAT('%',#{commodityName},'%')
-      AND atr.seller_name LIKE CONCAT('%',#{sellerName},'%')
-      AND atr.trade_state LIKE CONCAT('%',#{tradeState},'%')
-      AND atr.pay_mode LIKE CONCAT('%',#{payMode},'%')
+      AND atr.commodity_name LIKE  '%${commodityName}%'
+      AND atr.seller_name LIKE  '%${sellerName}%'
+      AND atr.trade_state LIKE  '%${tradeState}%'
+      AND atr.pay_mode LIKE  '%${payMode}%'
       AND atr.trade_total_amount <![CDATA[ >= ]]> #{tradeTotalAmountStart}
       AND atr.trade_total_amount <![CDATA[ <= ]]> #{tradeTotalAmountEnd}
       AND atr.buyer_pay_date BETWEEN STR_TO_DATE(

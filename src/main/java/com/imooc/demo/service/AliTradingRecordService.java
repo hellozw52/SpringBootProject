@@ -116,7 +116,7 @@ public class AliTradingRecordService {
         params.put("sort", sort);
         params.put("order",order);
 
-        return alibabaTradingRecordMapper.getTradRecordConditionTotalNum(params).size();
+        return alibabaTradingRecordMapper.getTradRecordConditionTotalNum(params);
     }
 
     public List<Map<String, Object>> normalQuery(String userId, String commodityName) {
