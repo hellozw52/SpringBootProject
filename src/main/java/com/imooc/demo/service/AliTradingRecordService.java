@@ -3,6 +3,7 @@ package com.imooc.demo.service;
 import com.imooc.demo.mapper.AlibabaTradingRecordMapper;
 import com.imooc.demo.tool.FieldTool;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Transactional//配置事务，如果失败即回滚
 public class AliTradingRecordService {
 
     @Resource
