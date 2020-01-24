@@ -33,6 +33,17 @@ spring:
     timeBetweenEvictionRunsMillis: 60000
     validationQuery: select 'x'
 
+  # thymeleaf
+  thymeleaf:
+    cache: false
+    enabled: true
+    encoding: UTF-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+
 # Mybatis
 mybatis:
   mapper-locations: classpath*:/mapper/*    #把xml文件放在com.XX.mapper.*中可能会出现找不到的问题，这里把他放在resource下的mapper中

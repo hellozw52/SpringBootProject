@@ -44,7 +44,7 @@ public class AliTradingRecordController extends BaseController {
 
         // 将参数全部传递至service层进行整理、入map
         if ((commodityName != "") || (sellerName != "") || (tradeState != "") || (tradeState != "") || (payMode != "") || (tradeTotalAmountStart != "")
-            || (tradeTotalAmountEnd != "") || (startTime != "") || (endTime != "") || (weekNum != "")|| (startDuration != "") || (endDuration != "")) {
+                || (tradeTotalAmountEnd != "") || (startTime != "") || (endTime != "") || (weekNum != "") || (startDuration != "") || (endDuration != "")) {
             listMap = aliTradingRecordService.getTradRecordCondition(userId,commodityName,sellerName,tradeState,payMode,tradeTotalAmountStart,tradeTotalAmountEnd,startTime,endTime,weekNum,startDuration,endDuration,sort,order,start,size);
             listNum = aliTradingRecordService.getTradRecordConditionTotalNum(userId,commodityName,sellerName,tradeState,payMode,tradeTotalAmountStart,tradeTotalAmountEnd,startTime,endTime,weekNum,startDuration,endDuration,sort,order);
         }
