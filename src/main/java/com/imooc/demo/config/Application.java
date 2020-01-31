@@ -21,8 +21,8 @@ public class Application extends SpringBootServletInitializer {
         SpringApplication app = new SpringApplication(Application.class);
         Environment env = app.run(args).getEnvironment();
         System.out.println("启动成功！！");
-        System.out.println("项目根地址: \t\thttp://127.0.0.1:" + env.getProperty("server.port"));
-        System.out.println("查询接口: \thttp://127.0.0.1:" + env.getProperty("server.port") + env.getProperty("server.servlet.context-path") + "/user/list");
+        System.out.println("用户查询: \thttp://127.0.0.1:" + env.getProperty("server.port") + env.getProperty("server.servlet.context-path") + "/user/list");
+        System.out.println("交易查询: \thttp://127.0.0.1:" + env.getProperty("server.port") + env.getProperty("server.servlet.context-path") + "/aliTradingRecord/normalQuery?userId=2088332759128563&commodityName=云南");
         System.out.println("页面跳转: \thttp://127.0.0.1:" + env.getProperty("server.port") + env.getProperty("server.servlet.context-path") + "/th/index");
     }
 
