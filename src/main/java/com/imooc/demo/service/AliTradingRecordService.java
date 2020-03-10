@@ -18,7 +18,7 @@ public class AliTradingRecordService {
     @Resource
     private AlibabaTradingRecordMapper alibabaTradingRecordMapper;
 
-    public List<Map<String, Object>> getTradRecordCondition(String userId, String commodityName, String sellerName, String tradeState, String payMode, String tradeTotalAmountStart, String tradeTotalAmountEnd, String startTime, String endTime, String weekNum, String startDuration, String endDuration,String sort,String order, int start, int size) throws ParseException {
+    public List<Map<String, Object>> getTradeRecordCondition(String userId, String commodityName, String sellerName, String tradeState, String payMode, String tradeTotalAmountStart, String tradeTotalAmountEnd, String startTime, String endTime, String weekNum, String startDuration, String endDuration,String sort,String order, int start, int size) throws ParseException {
         //将驼峰命名转为下划线命名,与数据库一致
         sort = FieldTool.humpToUnderline(sort);
         //设置每页起始位置
@@ -68,10 +68,10 @@ public class AliTradingRecordService {
         params.put("start", start);
         params.put("size", size);
 
-        return FieldTool.formatHumpNameForList(alibabaTradingRecordMapper.getTradRecordCondition(params));
+        return FieldTool.formatHumpNameForList(alibabaTradingRecordMapper.getTradeRecordCondition(params));
     }
 
-    public int getTradRecordConditionTotalNum(String userId, String commodityName, String sellerName, String tradeState, String payMode, String tradeTotalAmountStart, String tradeTotalAmountEnd, String startTime, String endTime, String weekNum, String startDuration, String endDuration,String sort,String order) throws ParseException {
+    public int getTradeRecordConditionTotalNum(String userId, String commodityName, String sellerName, String tradeState, String payMode, String tradeTotalAmountStart, String tradeTotalAmountEnd, String startTime, String endTime, String weekNum, String startDuration, String endDuration,String sort,String order) throws ParseException {
 
         //将驼峰命名转为下划线命名,与数据库一致
         sort = FieldTool.humpToUnderline(sort);
@@ -118,7 +118,7 @@ public class AliTradingRecordService {
         params.put("sort", sort);
         params.put("order",order);
 
-        return alibabaTradingRecordMapper.getTradRecordConditionTotalNum(params);
+        return alibabaTradingRecordMapper.getTradeRecordConditionTotalNum(params);
     }
 
     public List<Map<String, Object>> normalQuery(String userId, String commodityName) {

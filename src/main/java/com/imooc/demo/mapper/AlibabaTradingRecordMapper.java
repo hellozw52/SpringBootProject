@@ -18,10 +18,10 @@ public interface AlibabaTradingRecordMapper {
     int updateByPrimaryKey(AlibabaTradingRecord record);
 
 
-    List<Map<String, Object>> getTradRecordCondition(Map<String,Object> params);
+    List<Map<String, Object>> getTradeRecordCondition(Map<String,Object> params);
 
 
-    int getTradRecordConditionTotalNum(Map<String,Object> params);
+    int getTradeRecordConditionTotalNum(Map<String,Object> params);
 
     List<Map<String, Object>> normalQuery(@Param("userId") String userId,@Param("commodityName") String commodityName);
 }
