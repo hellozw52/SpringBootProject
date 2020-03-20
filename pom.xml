@@ -75,7 +75,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!--添加mybatis generator反向工程   生产环境部署时，注释掉，防止重新生成文件！-->
+            <!--添加mybatis generator反向工程-->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
