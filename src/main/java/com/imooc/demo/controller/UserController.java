@@ -1,6 +1,6 @@
 package com.imooc.demo.controller;
 
-import com.imooc.demo.config.Application;
+import com.imooc.demo.DemoApplication;
 import com.imooc.demo.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,59 +19,7 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController extends BaseController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
-
-    /**
-     * 新增
-     */
-    @RequestMapping("/add")
-    public void add(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password
-    ) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setRegisterTime(new Date());
-        userService.insert(user);
-    }
-
-    /**
-     * 删除
-     */
-    @RequestMapping("/delete")
-    public void delete(
-            @RequestParam("id") int id
-    ) {
-        userService.delete(id);
-    }
-
-    /**
-     * 修改
-     */
-    @RequestMapping("/update")
-    public void update(
-            @RequestParam("id") int id,
-            @RequestParam("username") String username,
-            @RequestParam("password") String password
-    ) {
-        User user = new User();
-        user.setId(id);
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setRegisterTime(new Date());
-        userService.update(user);
-    }
-
-    /**
-     * 查询所有用户
-     */
-    @RequestMapping("/list")
-    public List<User> list() {
-        LOG.info("查询开始");
-        List<User> allUser = userService.list();
-        return allUser;
-    }
+    private static final Logger LOG = LoggerFactory.getLogger(DemoApplication.class);
 
     /**
      * 查询所有用户 listMap方式  转为驼峰命名
@@ -83,16 +31,5 @@ public class UserController extends BaseController {
         return listMap;
     }
 
-    /**
-     * 查询单个用户
-     */
-    @RequestMapping("/getOne")
-    public User getOne(
-        @RequestParam("id") int id
-    ) {
-        LOG.info("查询开始");
-        User oneUser = userService.getOne(id);
-        return oneUser;
-    }
 
 }

@@ -22,26 +22,6 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
-    public void insert(User user) {
-        userMapper.insert(user);
-    }
-
-    public void delete(int id) {
-        userMapper.deleteByPrimaryKey(id);
-    }
-
-    public void update(User user) {
-        userMapper.updateByPrimaryKey(user);
-    }
-
-    public List<User> list() {
-        return userMapper.selectAll();
-    }
-
-    public User getOne(int id) {
-        return userMapper.selectByPrimaryKey(id);
-    }
-
     public List<Map<String, Object>> listByListMap() {
         //转为驼峰命名
         return formatHumpNameForList(userMapper.listByListMap());
