@@ -7,4 +7,11 @@
         <setting name = "logImpl" value = "STDOUT_LOGGING"></setting>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
+
+    <!-- 引入 pageHelper插件 -->
+    <!--注意这里要写成PageInterceptor, 5.0之前的版本都是写PageHelper, 5.0之后要换成PageInterceptor-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+
 </configuration>

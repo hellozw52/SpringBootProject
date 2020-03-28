@@ -1,6 +1,6 @@
 package com.imooc.demo.service;
 
-import com.imooc.demo.domain.User;
+import com.github.pagehelper.PageHelper;
 import com.imooc.demo.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +22,19 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
-    public List<Map<String, Object>> listByListMap() {
+    public List<Map<String, Object>> currentPageList(int page,int limit) {
+
+        //利用PageHelper分页查询 注意：这个一定要放查询语句的前一行,否则无法进行分页,因为它对紧随其后第一个sql语句有效
+        PageHelper.startPage(page,limit);
         //转为驼峰命名
-        return formatHumpNameForList(userMapper.listByListMap());
+        return formatHumpNameForList(userMapper.currentPageList());
+    }
+
+    public Map<String, Object> login(String username, String password) {
+        return userMapper.login(username,password);
+    }
+
+    public int getUserTotalNum() {
+        return userMapper.getUserTotalNum();
     }
 }

@@ -10,11 +10,10 @@ server:
 
 # Spring
 spring:
-  transaction:
-    rollback-on-commit-failure: true
   application:
     name: demo
-
+  transaction:
+    rollback-on-commit-failure: true
   devtools:
     restart:
       enabled: true  #设置开启热部署
@@ -40,16 +39,9 @@ spring:
     timeBetweenEvictionRunsMillis: 60000
     validationQuery: SELECT 1 FROM DUAL
 
-  # thymeleaf
-  thymeleaf:
-    cache: false
-    enabled: true
-    encoding: UTF-8
-    mode: HTML5
-    prefix: classpath:/templates/
-    suffix: .html
-    servlet:
-      content-type: text/html
+  #设置静态资源路径，多个以逗号分隔
+  resources:
+    static-locations: classpath:static/,file:static/
 
 # Mybatis
 mybatis:

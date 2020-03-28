@@ -1,6 +1,8 @@
 package com.imooc.demo.controller;
 
-import com.imooc.demo.service.*;
+import com.imooc.demo.service.AliTradingRecordService;
+import com.imooc.demo.service.UserService;
+import com.imooc.demo.tool.Layui;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -17,6 +19,8 @@ public class BaseController {
     protected Map<String, Object> map; //一条记录
     protected List<Map<String,Object>> listMap; //多条记录
     protected int listNum;//记录个数
+    protected Map<String, Object> result;//返回结果
+    protected Layui layuiResult;//给layui返回的结果
 
     // 待注入的service对象
     @Resource
@@ -47,5 +51,13 @@ public class BaseController {
 
     public void setListNum(int listNum) {
         this.listNum = listNum;
+    }
+
+    public Map<String, Object> getResult() {
+        return result;
+    }
+
+    public void setResult(Map<String, Object> result) {
+        this.result = result;
     }
 }

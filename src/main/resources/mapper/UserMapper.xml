@@ -8,9 +8,19 @@
     <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
   </resultMap>
 
-  <select id="listByListMap" resultType="java.util.HashMap">
+  <select id="currentPageList" resultType="java.util.HashMap">
     select *
     from user
+  </select>
+
+  <select id="getUserTotalNum"  resultType="int">
+    select count(*)
+    from user ;
+  </select>
+
+  <select id="login"  resultType="java.util.Map">
+    select username,password
+    from user where username = #{username} and password = #{password} limit 1;
   </select>
 
 </mapper>
