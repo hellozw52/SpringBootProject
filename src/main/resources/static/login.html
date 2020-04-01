@@ -11,14 +11,15 @@
     <link rel="stylesheet" href="./static/css/font.css">
 	<link rel="stylesheet" href="./static/css/weadmin.css">
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script src="static/js/jquery/jquery-3.3.1.min.js"></script>
+    <script src="static/js/jquery/jquery.serializejson.min.js"></script>
 
 </head>
 <body class="login-bg">
-    
     <div class="login">
         <div class="message">后台管理系统</div>
         <div id="darkbannerwrap"></div>
-        
+
         <form method="post" class="layui-form" >
             <input id="username" name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
@@ -26,55 +27,55 @@
             <hr class="hr15">
             <input class="loginin" value="登录" lay-submit="" lay-filter="login" style="width:100%;" type="submit">
             <hr class="hr20" >
-            <div>
-            	前端静态展示，请随意输入，即可登录。
-            </div>
+            <!--<div>-->
+                <!--前端静态展示，请随意输入，即可登录。-->
+            <!--</div>-->
         </form>
     </div>
 
     <script type="text/javascript">
-        
-        	layui.extend({
-				admin: '{/}./static/js/admin'
-			});
-            layui.use(['form','admin','layer'], function(){
-              var form = layui.form
-              	,admin = layui.admin
-                ,layer = layui.layer;
 
-              //监听提交
-              form.on('submit(login)', function(data){
-                layer.msg(JSON.stringify(data.field),function(){
-                    location.href='./index.html'
-                });
+        layui.extend({
+            admin: '{/}./static/js/admin'
+        });
+        layui.use(['form', 'admin', 'layer'], function () {
+            var form = layui.form;
+            var admin = layui.admin;
+            var layer = layui.layer;
+
+            //监听提交
+            form.on("submit(login)", function () {
+                login();
                 return false;
-              });
             });
+        });
 
+        //登录
+        function login() {
+            var username = $("#username").val().trim();
+            var password = $("#password").val().trim();
 
-            function login() {
-                var username = $("#username").val();
-                var password = $("#password").val();
-
-                $.ajax({
-                    type: "post",
-                    dataType: "json",
-                    url:  './user/login',
-                    data: {
-                        username: username,
-                        password: password
-                    },
-                    success:function(data) {
-                        if (data.result == "success") {
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url:  "./user/login",
+                data: {
+                    username: username,
+                    password: password
+                },
+                success:function(data) {
+                    if (data.result == "success") {
+                        layer.alert(data.msg, function () {
                             window.location.href = data.url;
-                        } else {
-                            layer.alert(data.msg, function () {
-                                layer.closeAll();//关闭所有弹框
-                            });
-                        }
+                        });
+                    } else {
+                        layer.alert(data.msg, function () {
+                            layer.closeAll();//关闭所有弹框
+                        });
                     }
-                });
-            }
+                }
+            });
+        }
     </script>  
     <!-- 底部结束 -->
 </body>

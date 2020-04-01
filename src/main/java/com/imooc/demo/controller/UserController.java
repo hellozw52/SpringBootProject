@@ -49,7 +49,7 @@ public class UserController extends BaseController {
 
         if(map!=null){
             result.put("result","success");
-            result.put("msg","登录成功");
+            result.put("msg","登录成功，欢迎您： "+username);
             result.put("url","./index.html");
         }else {
             result.put("result","false");

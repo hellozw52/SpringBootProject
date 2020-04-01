@@ -69,20 +69,24 @@
 
                 table.render({
                     elem: '#userList'  //绑定table id
-                    ,url:'http://127.0.0.1:8001/demo/user/listByListMap'  //数据请求路径
+                    // ,url:'http://127.0.0.1:8001/demo/user/listByListMap'  //数据请求路径
+                    ,url:'../../user/listByListMap'  //数据请求路径
                     ,cellMinWidth: 80
                     ,cols: [[
                         {type:'numbers'}
-                        // ,{field:'id', title:'序号'}
+                        ,{field:'id', title:'序号'}
                         ,{field:'username', title:'账号',width:150}
                         ,{field:'password', title: '密码'}
                         ,{field:'registerTime', title: '注册时间'}
-                        ,{fixed: 'right',title: '操作', width:180,      align:'center', toolbar: '#toolBar'}//一个工具栏  具体请查看layui官网
+                        //,{fixed: 'right',title: '操作', width:180,align:'center', toolbar: '#toolBar'}//一个工具栏  具体请查看layui官网
                     ]]
                     ,page: true   //开启分页
                     ,limit:10   //默认十条数据一页
                     ,limits:[10,20,30,50]  //数据分页条
                     ,id: 'testReload'
+                    ,done: function () {
+                        $("[data-field = 'id']").css('display','none');
+                    }
                 });
             });
 
