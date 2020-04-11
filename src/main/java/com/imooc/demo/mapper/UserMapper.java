@@ -15,4 +15,8 @@ public interface UserMapper {
     Map<String, Object> login(@Param("username") String username, @Param("password") String password);
 
     int getUserTotalNum();
+
+    boolean checkUserNameExsit(String username);
+
+    int add(@Param("username") String username, @Param("password") String password);
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,5 +37,30 @@ public class UserService {
 
     public int getUserTotalNum() {
         return userMapper.getUserTotalNum();
+    }
+
+    public Map<String, Object> add(String username, String password) {
+        // 返回结果
+        Map<String,Object> result = new HashMap<>();
+
+        boolean isUserNameExsit = userMapper.checkUserNameExsit(username);
+        // 账号已存在
+        if(isUserNameExsit){
+            result.put("result",false);
+            result.put("msg","账号已存在，不能重复注册！");
+            return result;
+        }else {
+            //插入结果的自增主键
+            int insertResultId = userMapper.add(username,password);
+
+            if(insertResultId>0){
+                result.put("result",true);
+                result.put("msg","账号添加成功！");
+            }else {
+                result.put("result",false);
+                result.put("msg","账号添加失败！");
+            }
+        }
+        return result;
     }
 }

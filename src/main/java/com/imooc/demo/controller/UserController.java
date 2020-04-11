@@ -59,5 +59,14 @@ public class UserController extends BaseController {
         return result;
     }
 
+    @ResponseBody
+    @RequestMapping("add")
+    public Map<String,Object> add(@RequestParam("username") String username,@RequestParam("password") String password){
+        logger.info("添加用户");
+        //返回结果
+        map = userService.add(username,password);
+        return map;
+    }
+
 
 }
