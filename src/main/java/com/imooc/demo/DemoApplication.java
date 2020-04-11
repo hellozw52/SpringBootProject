@@ -18,6 +18,7 @@ public class DemoApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(DemoApplication.class);
         Environment env = app.run(args).getEnvironment();
+        System.out.println("用户登录: \thttp://127.0.0.1:" + env.getProperty("server.port") + env.getProperty("server.servlet.context-path") + "/login.html");
         System.out.println("用户查询: \thttp://127.0.0.1:" + env.getProperty("server.port") + env.getProperty("server.servlet.context-path") + "/user/listByListMap?page=1&limit=10");
         System.out.println("交易查询: \thttp://127.0.0.1:" + env.getProperty("server.port") + env.getProperty("server.servlet.context-path") + "/aliTradingRecord/normalQuery?userId=2088332759128563&commodityName=云南");
     }
