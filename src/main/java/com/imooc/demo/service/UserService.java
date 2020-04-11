@@ -51,7 +51,7 @@ public class UserService {
             return result;
         }else {
             //插入结果的自增主键
-            int insertResultId = userMapper.add(username,password);
+int insertResultId = userMapper.add(username,password);
 
             if(insertResultId>0){
                 result.put("result",true);
