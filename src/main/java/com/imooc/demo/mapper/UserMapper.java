@@ -18,5 +18,5 @@ public interface UserMapper {
 
     boolean checkUserNameExsit(String username);
 
-    int add(@Param("username") String username, @Param("password") String password);
+    int add(User user);
 }

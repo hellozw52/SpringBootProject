@@ -28,7 +28,7 @@
     from user where username = #{username};
   </select>
 
-  <insert id="add"  useGeneratedKeys="true" keyProperty="id">
+  <insert id="add" parameterType="com.imooc.demo.domain.User" useGeneratedKeys="true" keyProperty="id">
     insert into user (username,password,register_time) values (#{username},#{password},Now());
   </insert>
 

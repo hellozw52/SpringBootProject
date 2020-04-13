@@ -1,6 +1,7 @@
 package com.imooc.demo.service;
 
 import com.github.pagehelper.PageHelper;
+import com.imooc.demo.domain.User;
 import com.imooc.demo.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +51,13 @@ public class UserService {
             result.put("msg","账号已存在，不能重复注册！");
             return result;
         }else {
-            //插入结果的自增主键
-int insertResultId = userMapper.add(username,password);
+            User user =  new User();
+            user.setUsername(username);
+            user.setPassword(password);
+            //插入
+            userMapper.add(user);
+            //插入结果的自增id
+            int insertResultId = user.getId();
 
             if(insertResultId>0){
                 result.put("result",true);
