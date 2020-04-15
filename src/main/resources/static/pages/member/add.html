@@ -11,8 +11,10 @@
 		<link rel="stylesheet" href="../../static/css/weadmin.css">
 		<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 		<!--[if lt IE 9]>
-	      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-	      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+		<!--<script src="../../static/js/jquery/jquery.serializejson.min.js"></script>-->
+		<!--<script src="../../static/js/jquery/jquery-3.3.1.min.js"></script>-->
+		<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+		<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 	    <![endif]-->
 	</head>
 
@@ -27,7 +29,7 @@
 						<input type="text" id="L_username" name="username" lay-verify="required|nikename" autocomplete="off" class="layui-input">
 					</div>
 					<div class="layui-form-mid layui-word-aux">
-						请设置至少5个字符，将会成为您唯一的登录名
+						请设置至少5个字符
 					</div>
 				</div>
 
@@ -39,20 +41,20 @@
 						<input type="password" id="L_pass" name="pass" lay-verify="required|pass" autocomplete="off" class="layui-input">
 					</div>
 					<div class="layui-form-mid layui-word-aux">
-						6到16个字符
+						请设置6到16个字符
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label for="L_repass" class="layui-form-label">
-                  <span class="we-red">*</span>确认密码
-              </label>
+                  	<span class="we-red">*</span>确认密码
+             		 </label>
 					<div class="layui-input-inline">
 						<input type="password" id="L_repass" name="repass" lay-verify="required|repass" autocomplete="off" class="layui-input">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label for="L_repass" class="layui-form-label">
-              </label>
+              		</label>
 					<button class="layui-btn" lay-filter="add" lay-submit="">确定</button>
 				</div>
 			</form>
@@ -87,35 +89,42 @@
 
 				//监听提交
 				form.on('submit(add)', function() {
+                    add();
+				    return false;
+				});
 
+                //添加用户
+                function add() {
                     var username = $("#L_username").val().trim();
                     var password = $("#L_pass").val().trim();
 
                     //添加
-				    $.ajax({
+                    $.ajax({
                         type: "post",
                         dataType: "json",
-                        url:  "./user/login",
+                        url:  "../../user/add",
                         data: {
                             username: username,
                             password: password
                         },
                         success:function(data) {
-                            if (data.result == "success") {
-                                layer.alert(data.msg, function () {
-                                    window.location.href = data.url;
+                            // alert("ccc");
+                            if (data.result == true) {
+                                layer.alert(data.msg, function() {
+                                    layer.closeAll();
                                 });
                             } else {
-                                layer.alert(data.msg, function () {
-                                    layer.closeAll();//关闭所有弹框
+                                layer.alert(data.msg, function() {
+                                    layer.closeAll();
                                 });
                             }
                         }
                     });
-
-				});
+                }
 
 			});
+
+
 		</script>
 	</body>
 
