@@ -9,7 +9,7 @@
   </resultMap>
 
   <select id="currentPageList" resultType="java.util.HashMap">
-    select *
+    select id,username,password,DATE_FORMAT(register_time,'%Y-%m-%d %H:%m:%s') register_time
     from user
   </select>
 
@@ -31,5 +31,21 @@
   <insert id="add" parameterType="com.imooc.demo.domain.User" useGeneratedKeys="true" keyProperty="id">
     insert into user (username,password,register_time) values (#{username},#{password},Now());
   </insert>
+
+  <select id="search" resultType="java.util.Map" >
+    select id,username,password,DATE_FORMAT(register_time,'%Y-%m-%d %H:%m:%s') register_time
+      from user
+    where
+      username like '%${username}%'
+      AND register_time between #{startime} and #{endtime}
+  </select>
+
+  <select id="searchTotalNum" resultType="java.util.Map" >
+    select id
+      from user
+    where
+      username like '%${username}%'
+      AND register_time between #{startime} and #{endtime}
+  </select>
 
 </mapper>

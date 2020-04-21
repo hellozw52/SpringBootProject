@@ -33,15 +33,15 @@
 				<form class="layui-form layui-col-md12 we-search">
 					会员搜索：
 					<div class="layui-inline">
-						<input class="layui-input" placeholder="开始日" name="start" id="start" />
+						<input id="input_username" type="text" name="username" placeholder="请输入账号" autocomplete="off" class="layui-input" />
 					</div>
 					<div class="layui-inline">
-						<input class="layui-input" placeholder="截止日" name="end" id="end" />
+						<input id="input_startime" class="layui-input" placeholder="开始时间" name="start" id="start" />
 					</div>
 					<div class="layui-inline">
-						<input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input" />
+						<input id="input_endtime" class="layui-input" placeholder="结束时间" name="end" id="end" />
 					</div>
-					<button class="layui-btn" lay-submit="" lay-filter="sreach">
+					<button class="layui-btn" lay-submit="" lay-filter="search">
 						<i class="layui-icon layui-icon-search"></i>
 					</button>
 				</form>
@@ -65,15 +65,29 @@
 		<script>
             layui.use(['form','layer','table'], function(){
                 var table = layui.table
-                    ,form = layui.form,$=layui.$;
+                    ,form = layui.form
+					,$=layui.$
+					,laydate = layui.laydate;//日期控件
 
+                //设置日期控件
+                laydate.render({
+					elem: '#input_startime'
+                    ,type: 'datetime'
+                });
+
+                laydate.render({
+                    elem: '#input_endtime'
+                    ,type: 'datetime'
+                });
+
+                //加载数据表
                 table.render({
+                    id:"id",//返回数据中的主键ID
                     elem: '#userList'  //绑定table id
-                    // ,url:'http://127.0.0.1:8001/demo/user/listByListMap'  //数据请求路径
                     ,url:'../../user/listByListMap'  //数据请求路径
                     ,cellMinWidth: 80
                     ,cols: [[
-                        {type:'numbers'}
+                        {type:'checkbox'}
                         ,{field:'id', title:'序号'}
                         ,{field:'username', title:'账号',width:150}
                         ,{field:'password', title: '密码'}
@@ -83,11 +97,53 @@
                     ,page: true   //开启分页
                     ,limit:10   //默认十条数据一页
                     ,limits:[10,20,30,50]  //数据分页条
-                    ,id: 'testReload'
                     ,done: function () {
                         $("[data-field = 'id']").css('display','none');
                     }
                 });
+
+                form.on('submit(search)', function(data) {
+                    var username = $("#input_username").val().trim();
+                    var startime = $("#input_startime").val();
+                    var endtime = $("#input_endtime").val();
+
+                    table.reload('id', {
+                        method: 'post',
+                        url: '../../user/search',
+                        where: {
+                            username:username,
+                            startime:startime,
+                            endtime:endtime
+                        },
+                        page: {
+                            curr: 1
+                        }
+                    });
+                    return false;
+                });
+
+                //搜索
+                function search() {
+                    var username = $("#input_username").val().trim();
+                    var startime = $("#input_startime").val();
+                    var endtime = $("#input_endtime").val();
+
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url:  "./user/search",
+                        data: {
+                            username: username,
+                            startime: startime,
+							endtime: endtime
+                        },
+                        success:function(data) {
+                            if (data.code == 0 && data.date) {
+
+                            }
+                        }
+                    });
+                }
             });
 
 		</script>

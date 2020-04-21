@@ -69,4 +69,28 @@ public class UserService {
         }
         return result;
     }
+
+    public List<Map<String, Object>> search(String username,String startime,String endtime,int page,int limit) {
+
+        //查询条件  多个条件时 用map传参
+        Map param = new HashMap();
+        param.put("username",username);
+        param.put("startime",startime);
+        param.put("endtime",endtime);
+
+        //利用PageHelper分页查询 注意：这个一定要放查询语句的前一行,否则无法进行分页,因为它对紧随其后第一个sql语句有效
+        PageHelper.startPage(page,limit);
+        //转为驼峰命名
+        return formatHumpNameForList(userMapper.search(param));
+    }
+
+    public int searchTotalNum(String username,String startime,String endtime) {
+        //查询条件  多个条件时 用map传参
+        Map param = new HashMap();
+        param.put("username",username);
+        param.put("startime",startime);
+        param.put("endtime",endtime);
+
+        return userMapper.searchTotalNum(param).size();
+    }
 }

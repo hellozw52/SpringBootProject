@@ -19,4 +19,8 @@ public interface UserMapper {
     boolean checkUserNameExsit(String username);
 
     int add(User user);
+
+    List<Map<String, Object>> search(Map param);
+
+    List searchTotalNum(Map param);
 }

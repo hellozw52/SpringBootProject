@@ -68,5 +68,39 @@ public class UserController extends BaseController {
         return map;
     }
 
+    /**
+     * 查询
+     */
+    @ResponseBody
+    @RequestMapping("/search")
+    public Layui search(
+            @RequestParam("username") String username,
+            @RequestParam("startime") String startime,
+            @RequestParam("endtime") String endtime,
+            @RequestParam("page") String page,
+            @RequestParam("limit") String limit
+    ) {
+
+        logger.info("查询开始");
+
+        int pagecc = Integer.parseInt((page == null || page == "0") ? "1" : page);// 开始位置
+        int limitcc = Integer.parseInt((limit == null || limit == "0") ? "10" : limit);// 每页个数
+
+        if (startime.equals("") || startime == null){
+            startime = "1860-01-01";
+        }
+        if (endtime.equals("") || endtime == null){
+            endtime = "2300-01-01";
+        }
+
+        layuiResult = new Layui();//返回layui结果
+
+        listMap = userService.search(username,startime,endtime,pagecc,limitcc);
+        listNum = userService.searchTotalNum(username,startime,endtime);
+
+        return layuiResult.data(listNum,listMap);
+
+    }
+
 
 }
