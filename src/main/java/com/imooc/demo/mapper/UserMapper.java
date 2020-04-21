@@ -10,7 +10,7 @@ import java.util.Map;
 @Mapper
 public interface UserMapper {
 
-    List<Map<String,Object>> currentPageList();
+    List<Map<String,Object>> currentPageList(@Param("orderField") String orderField, @Param("orderType") String orderType);
 
     Map<String, Object> login(@Param("username") String username, @Param("password") String password);
 

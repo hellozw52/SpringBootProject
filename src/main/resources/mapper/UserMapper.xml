@@ -10,7 +10,7 @@
 
   <select id="currentPageList" resultType="java.util.HashMap">
     select id,username,password,DATE_FORMAT(register_time,'%Y-%m-%d %H:%m:%s') register_time
-    from user
+    from user order by ${orderField} ${orderType}
   </select>
 
   <select id="getUserTotalNum"  resultType="int">
@@ -37,7 +37,7 @@
       from user
     where
       username like '%${username}%'
-      AND register_time between #{startime} and #{endtime}
+      AND register_time between #{startime} and #{endtime} order by ${orderField} ${orderType}
   </select>
 
   <select id="searchTotalNum" resultType="java.util.Map" >

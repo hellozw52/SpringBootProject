@@ -3,6 +3,7 @@ package com.imooc.demo.service;
 import com.github.pagehelper.PageHelper;
 import com.imooc.demo.domain.User;
 import com.imooc.demo.mapper.UserMapper;
+import com.imooc.demo.tool.FieldTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -24,12 +25,15 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
-    public List<Map<String, Object>> currentPageList(int page,int limit) {
+    public List<Map<String, Object>> currentPageList(int page,int limit,String orderField,String orderType) {
+
+        //排序字段  驼峰转下划线
+        orderField = FieldTool.humpToUnderline(orderField);
 
         //利用PageHelper分页查询 注意：这个一定要放查询语句的前一行,否则无法进行分页,因为它对紧随其后第一个sql语句有效
         PageHelper.startPage(page,limit);
         //转为驼峰命名
-        return formatHumpNameForList(userMapper.currentPageList());
+        return formatHumpNameForList(userMapper.currentPageList(orderField,orderType));
     }
 
     public Map<String, Object> login(String username, String password) {
@@ -70,13 +74,18 @@ public class UserService {
         return result;
     }
 
-    public List<Map<String, Object>> search(String username,String startime,String endtime,int page,int limit) {
+    public List<Map<String, Object>> search(String username,String startime,String endtime,String orderField,String orderType,int page,int limit) {
+
+        //排序字段  驼峰转下划线
+        orderField = FieldTool.humpToUnderline(orderField);
 
         //查询条件  多个条件时 用map传参
         Map param = new HashMap();
         param.put("username",username);
         param.put("startime",startime);
         param.put("endtime",endtime);
+        param.put("orderField",orderField);
+        param.put("orderType",orderType);
 
         //利用PageHelper分页查询 注意：这个一定要放查询语句的前一行,否则无法进行分页,因为它对紧随其后第一个sql语句有效
         PageHelper.startPage(page,limit);
@@ -85,6 +94,7 @@ public class UserService {
     }
 
     public int searchTotalNum(String username,String startime,String endtime) {
+
         //查询条件  多个条件时 用map传参
         Map param = new HashMap();
         param.put("username",username);

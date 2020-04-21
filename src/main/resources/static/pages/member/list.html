@@ -53,21 +53,62 @@
 				<button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html',600,400)">
 					<i class="layui-icon layui-icon-add-circle-fine"></i>添加
 				</button>
+				<button class="layui-btn" onclick="edit()">
+					<i class="layui-icon"></i>修改
+				</button>
 			</div>
 
 			<table class="layui-hide" id="userList" lay-filter="table"></table>
 
 		</div>
+
+		<!--这里是弹出层的表单信息，表单的id用于表单的选择，style是在本页隐藏，只有点击编辑才会弹出-->
+		<div class="layui-row" id="popUpdateTest" style="display:none;">
+			<div class="layui-col-md10">
+				<form class="layui-form layui-from-pane" action="" style="margin-top:20px" >
+					<div class="layui-form-item">
+						<label class="layui-form-label">账号</label>
+						<div class="layui-input-block">
+							<input type="text" name="neweqptIdCode"  required  lay-verify="required" autocomplete="off" placeholder="请输入账号" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">密码</label>
+						<div class="layui-input-block">
+							<input type="text" name="neweqptName"  required  lay-verify="required" autocomplete="off" placeholder="请输入密码" class="layui-input">
+						</div>
+					</div>
+
+					<div class="layui-form-item" style="margin-top:40px">
+						<div class="layui-input-block">
+							<button class="layui-btn  layui-btn-submit " lay-submit="" lay-filter="update">确认修改</button>
+							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
 		<!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
 		<script src="../../lib/layui/layui.js" charset="utf-8"></script>
 		<script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
 
+		<!-- 表格操作按钮集 -->
+		<script type="text/html" id="barOption">
+			<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		</script>
+
 		<script>
-            layui.use(['form','layer','table'], function(){
+            layui.use(['table','form','layer','laydate'], function(){
                 var table = layui.table
                     ,form = layui.form
+                    ,layer = layui.layer
+                    ,laydate = layui.laydate//日期控件
 					,$=layui.$
-					,laydate = layui.laydate;//日期控件
+
 
                 //设置日期控件
                 laydate.render({
@@ -82,32 +123,39 @@
 
                 //加载数据表
                 table.render({
-                    id:"id",//返回数据中的主键ID
-                    elem: '#userList'  //绑定table id
+                    id:"userList"
+                    ,elem: '#userList'  //绑定table标签 id
                     ,url:'../../user/listByListMap'  //数据请求路径
                     ,cellMinWidth: 80
                     ,cols: [[
                         {type:'checkbox'}
                         ,{field:'id', title:'序号'}
-                        ,{field:'username', title:'账号',width:150}
+                        ,{field:'username', title:'账号',width:150,sort:true}
                         ,{field:'password', title: '密码'}
-                        ,{field:'registerTime', title: '注册时间'}
-                        //,{fixed: 'right',title: '操作', width:180,align:'center', toolbar: '#toolBar'}//一个工具栏  具体请查看layui官网
+                        ,{field:'registerTime', title: '注册时间',sort:true}
+                        ,{fixed: 'right',title: '操作', width:300,align:'center', toolbar: '#barOption'}//一个工具栏  具体请查看layui官网
                     ]]
                     ,page: true   //开启分页
                     ,limit:10   //默认十条数据一页
                     ,limits:[10,20,30,50]  //数据分页条
+                    ,where: {//如果无需传递额外参数，可不加该参数
+                        orderField: 'registerTime' //排序字段，对应 cols 设定的各字段名
+                        ,orderType: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+					}
+					,sort: true
+                    ,autoSort: false //禁用前端自动排序。
                     ,done: function () {
                         $("[data-field = 'id']").css('display','none');
                     }
                 });
 
+                //查询
                 form.on('submit(search)', function(data) {
                     var username = $("#input_username").val().trim();
                     var startime = $("#input_startime").val();
                     var endtime = $("#input_endtime").val();
 
-                    table.reload('id', {
+                    table.reload('userList', {
                         method: 'post',
                         url: '../../user/search',
                         where: {
@@ -122,29 +170,117 @@
                     return false;
                 });
 
-                //搜索
-                function search() {
-                    var username = $("#input_username").val().trim();
-                    var startime = $("#input_startime").val();
-                    var endtime = $("#input_endtime").val();
+                //监听排序事件  后端排序
+                table.on('sort(table)', function(obj){ //注：sort 是工具条事件名，table 是table标签 lay-filter="对应的值"
 
-                    $.ajax({
-                        type: "post",
-                        dataType: "json",
-                        url:  "./user/search",
-                        data: {
-                            username: username,
-                            startime: startime,
-							endtime: endtime
-                        },
-                        success:function(data) {
-                            if (data.code == 0 && data.date) {
-
-                            }
+                    //根据当前排序的字段，重新向服务端发送请求，从而实现服务端排序，如：
+                    table.reload('userList', {
+                        initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。
+                        ,where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
+                            orderField: obj.field //排序字段
+                            ,orderType: obj.type //排序方式
                         }
                     });
+                });
+
+
+                //监听头工具栏事件
+                // table.on('toolbar(test)', function(obj){
+                //     var checkStatus = table.checkStatus(obj.config.id)
+                //         ,data = checkStatus.data; //获取选中的数据
+                //     switch(obj.event){
+                //         case 'add':
+                //             layer.msg('添加');
+                //             break;
+                //         case 'update':
+                //             if(data.length === 0){
+                //                 layer.msg('请选择一行');
+                //             } else if(data.length > 1){
+                //                 layer.msg('只能同时编辑一个');
+                //             } else {
+                //                 layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+                //             }
+                //             break;
+                //         case 'delete':
+                //             if(data.length === 0){
+                //                 layer.msg('请选择一行');
+                //             } else {
+                //                 layer.msg('删除');
+                //             }
+                //             break;
+                //     };
+                // });
+
+                //监听 行 工具事件
+                table.on('tool(table)', function (obj) {//注：tool 是工具条事件名，table 是table标签原始容器的属性 lay-filter="对应的值"
+
+                    var data = obj.data //获得当前行数据
+                        ,layEvent = obj.event; //获得 lay-event 对应的值
+
+                    if(layEvent === 'detail'){
+                        layer.msg('查看操作');
+                    } else if(layEvent === 'del'){
+                        layer.confirm('真的删除行么', function(index){
+                            obj.del(); //删除对应行（tr）的DOM结构
+                            layer.close(index);
+                            //向服务端发送删除指令
+                        });
+                    } else if(layEvent === 'edit'){
+                        //layer.msg('编辑操作');
+                        layer.open({
+                            //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                            type: 1,
+                            title: "修改用户",
+                            area: ['420px', '330px'],
+                            content: $("#popUpdateTest")//引用的弹出层的页面层的方式加载修改界面表单
+                        });
+                        //传参
+                        setFormValue(obj,data);
+                    }
+
+                });
+
+                //监听弹出框表单提交，massage是修改界面的表单数据'submit(demo11),是修改按钮的绑定
+                function setFormValue(obj,data){
+
+                    var username = data.username;
+                    var password = data.password;
+                    // alert(username)
+
+                    form.on('submit(update)', function(massage) {
+                        $.ajax({
+                            url:'/updateCollectorAndConfig',
+                            type:'POST',
+                            data:{
+                                username:username,
+								password:password
+							},
+							success:function (msg) {
+								var returnCode = msg.returnCode;//取得返回数据（Sting类型的字符串）的信息进行取值判断
+								if(returnCode==200){
+									layer.closeAll('loading');
+									layer.load(2);
+									layer.msg("修改成功", {icon: 6});
+									setTimeout(function(){
+										obj.update({
+											eqptType:massage.field.neweqptType,
+											eqptIdCode:massage.field.neweqptIdCode,
+											eqptName:massage.field.neweqptName
+										});//修改成功修改表格数据不进行跳转
+										layer.closeAll();//关闭所有的弹出层
+									}, 1000);
+									加载层-风格
+								}else{
+									layer.msg("修改失败", {icon: 5});
+								}
+							}
+                        })
+                    })
+
                 }
+
             });
+
 
 		</script>
 	</body>

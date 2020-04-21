@@ -25,13 +25,18 @@ public class UserController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/listByListMap")
-    public Layui listByListMap(int page,int limit) {
+    public Layui listByListMap(
+            @RequestParam("page") int page,
+            @RequestParam("limit") int limit,
+            @RequestParam("orderField") String orderField,
+            @RequestParam("orderType") String orderType
+    ) {
 
         logger.info("查询开始");
 
         layuiResult = new Layui();//返回layui结果
 
-        listMap = userService.currentPageList(page,limit);
+        listMap = userService.currentPageList(page,limit,orderField,orderType);
         listNum = userService.getUserTotalNum();
 
         return layuiResult.data(listNum,listMap);
@@ -78,7 +83,9 @@ public class UserController extends BaseController {
             @RequestParam("startime") String startime,
             @RequestParam("endtime") String endtime,
             @RequestParam("page") String page,
-            @RequestParam("limit") String limit
+            @RequestParam("limit") String limit,
+            @RequestParam("orderField") String orderField,
+            @RequestParam("orderType") String orderType
     ) {
 
         logger.info("查询开始");
@@ -95,7 +102,7 @@ public class UserController extends BaseController {
 
         layuiResult = new Layui();//返回layui结果
 
-        listMap = userService.search(username,startime,endtime,pagecc,limitcc);
+        listMap = userService.search(username,startime,endtime,orderField,orderType,pagecc,limitcc);
         listNum = userService.searchTotalNum(username,startime,endtime);
 
         return layuiResult.data(listNum,listMap);
