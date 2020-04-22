@@ -23,4 +23,6 @@ public interface UserMapper {
     List<Map<String, Object>> search(Map param);
 
     List searchTotalNum(Map param);
+
+    int update(User user);
 }

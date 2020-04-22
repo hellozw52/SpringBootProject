@@ -103,4 +103,26 @@ public class UserService {
 
         return userMapper.searchTotalNum(param).size();
     }
+
+    public Map<String, Object> update(String id,String username, String password) {
+        // 返回结果
+        Map<String,Object> result = new HashMap<>();
+
+        User user =  new User();
+        user.setId(Integer.parseInt(id));
+        user.setUsername(username);
+        user.setPassword(password);
+        //更新行数
+        int updateNum = userMapper.update(user);
+
+        if(updateNum ==1){
+            result.put("result",true);
+            result.put("msg","修改成功！");
+        }else {
+            result.put("result",false);
+            result.put("msg","修改失败！");
+        }
+
+        return result;
+    }
 }

@@ -43,6 +43,12 @@ public class UserController extends BaseController {
 
     }
 
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @return
+     */
     @ResponseBody
     @RequestMapping("login")
     public Map<String,Object> login(@RequestParam("username") String username,@RequestParam("password") String password){
@@ -64,6 +70,12 @@ public class UserController extends BaseController {
         return result;
     }
 
+    /**
+     * 新增
+     * @param username
+     * @param password
+     * @return
+     */
     @ResponseBody
     @RequestMapping("add")
     public Map<String,Object> add(@RequestParam("username") String username,@RequestParam("password") String password){
@@ -107,6 +119,25 @@ public class UserController extends BaseController {
 
         return layuiResult.data(listNum,listMap);
 
+    }
+
+    /**
+     * 修改
+     * @param id
+     * @param username
+     * @param password
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("update")
+    public Map<String,Object> update(
+            @RequestParam("id") String id,
+            @RequestParam("username") String username,
+            @RequestParam("password") String password){
+        logger.info("修改用户");
+        //返回结果
+        map = userService.update(id,username,password);
+        return map;
     }
 
 
