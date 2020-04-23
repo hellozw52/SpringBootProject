@@ -125,4 +125,18 @@ public class UserService {
 
         return result;
     }
+
+    public Map<String, Object> delete(List<String> ids) {
+        Map<String,Object> result = new HashMap<>();
+
+        int deleteNum = userMapper.delete(ids);
+        if(deleteNum>0){
+            result.put("result",true);
+            result.put("msg","删除成功！");
+        }else {
+            result.put("result",false);
+            result.put("msg","删除失败！");
+        }
+        return result;
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -137,6 +138,22 @@ public class UserController extends BaseController {
         logger.info("修改用户");
         //返回结果
         map = userService.update(id,username,password);
+        return map;
+    }
+
+    /**
+     * 批量删除
+     * @param id
+     * @param username
+     * @param password
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("delete")
+    public Map<String,Object> delete(@RequestParam("ids") List<String> ids){
+        logger.info("批量删除");
+        //返回结果
+        map = userService.delete(ids);
         return map;
     }
 

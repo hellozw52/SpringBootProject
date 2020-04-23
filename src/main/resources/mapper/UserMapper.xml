@@ -53,4 +53,9 @@
       where id=#{id}
   </update>
 
+  <delete id="delete"  parameterType = "java.util.List">
+    delete from user where id in
+    <foreach collection="list" item="item" open="(" separator="," close=")" >#{item}</foreach>
+  </delete>
+
 </mapper>

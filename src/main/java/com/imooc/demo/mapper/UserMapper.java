@@ -25,4 +25,6 @@ public interface UserMapper {
     List searchTotalNum(Map param);
 
     int update(User user);
+
+    int delete(List<String> ids);
 }
