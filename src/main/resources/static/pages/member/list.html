@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>会员列表-WeAdmin Frame型后台管理系统-WeAdmin 1.0</title>
+		<title>后台管理系统</title>
 		<meta name="renderer" content="webkit" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
@@ -74,6 +74,47 @@
 			</div>
 		</div>
 
+		<!--这里是弹出层的表单信息，只有点击添加才会弹出-->
+		<div class="weadmin-body" id="userAdd" style="display:none;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label for="L_username" class="layui-form-label">
+						<span class="we-red">*</span>账号
+					</label>
+					<div class="layui-input-inline">
+						<input type="text" id="L_username" name="username" lay-verify="required|nikename" autocomplete="off" class="layui-input">
+					</div>
+					<div class="layui-form-mid layui-word-aux">
+						请设置至少5个字符
+					</div>
+				</div>
+
+				<div class="layui-form-item">
+					<label for="L_pass" class="layui-form-label">
+						<span class="we-red">*</span>密码
+					</label>
+					<div class="layui-input-inline">
+						<input type="password" id="L_pass" name="pass" lay-verify="required|pass" autocomplete="off" class="layui-input">
+					</div>
+					<div class="layui-form-mid layui-word-aux">
+						请设置6到16个字符
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label for="L_repass" class="layui-form-label">
+						<span class="we-red">*</span>确认密码
+					</label>
+					<div class="layui-input-inline">
+						<input type="password" id="L_repass" name="repass" lay-verify="required|repass" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label for="L_repass" class="layui-form-label">
+					</label>
+					<button class="layui-btn" lay-filter="addUser" lay-submit="">确定</button>
+				</div>
+			</form>
+		</div>
 
 		<!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
 		<script src="../../lib/layui/layui.js" charset="utf-8"></script>
@@ -82,7 +123,7 @@
 		<script type="text/html" id="toolbarDemo">
 			<div class="layui-btn-container">
 				<button class="layui-btn layui-btn-sm layui-btn-danger" id="delMany">批量删除</button>
-				<button class="layui-btn layui-btn-sm" onclick="WeAdminShow('添加用户','./add.html',600,400)"><i class="layui-icon layui-icon-add-circle-fine"></i>添加</button>
+				<button class="layui-btn layui-btn-sm" id="add"><i class="layui-icon layui-icon-add-circle-fine"></i>添加</button>
 				<button class="layui-btn layui-btn-sm" onclick="javascript:location.replace(location.href);" title="刷新">
 					<i class="layui-icon layui-icon-refresh"></i>
 				</button>
@@ -192,13 +233,7 @@
 
                     if(layEvent === 'detail'){
                         layer.msg('查看操作');
-                    } else if(layEvent === 'del'){
-                        layer.confirm('真的删除行么', function(index){
-                            // obj.del(); //删除对应行（tr）的DOM结构
-                            // layer.close(index);
-                            //向服务端发送删除指令
-                        });
-                    } else if(layEvent === 'edit'){
+                    }else if(layEvent === 'edit'){
                         //layer.msg('编辑操作');
                         layer.open({
                             //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
@@ -300,10 +335,69 @@
 
                 });
 
+                //打开 添加页面
+                $("#add").on('click',function(){
+
+                    $("#L_username").val("");
+                    $("#L_pass").val("");
+
+                    layer.open({
+                        //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                        type: 1,
+                        title: "添加用户",
+                        // area: ['700px', '500px'],
+                        content: $("#userAdd")//引用的弹出层的页面层的方式加载修改界面表单
+                    });
+                });
+
+                //添加用户自定义验证规则
+                form.verify({
+                    nikename: function(value) {
+                        if(value.length < 5) {
+                            return '账号至少5个字符';
+                        }
+                    },
+                    pass: [/(.+){6,12}$/, '密码必须6到12位'],
+                    repass: function(value) {
+                        if($('#L_pass').val() != $('#L_repass').val()) {
+                            return '两次密码不一致';
+                        }
+                    }
+                });
+
+                //监听 添加
+                form.on('submit(addUser)', function() {
+                    var username = $("#L_username").val().trim();
+                    var password = $("#L_pass").val().trim();
+
+                    //添加
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url:  "../../user/add",
+                        data: {
+                            username: username,
+                            password: password
+                        },
+                        success:function(data) {
+                            // alert("ccc");
+                            if (data.result == true) {
+                                layer.alert(data.msg, function() {
+                                    layer.closeAll();
+                                    table.reload('userList');
+                                });
+                            } else {
+                                layer.alert(data.msg, function() {
+                                    layer.closeAll();
+                                });
+                            }
+                        }
+                    });
+
+                    return false;
+                });
 
             });
-
-
 		</script>
 	</body>
 </html>
