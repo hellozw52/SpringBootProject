@@ -1,5 +1,6 @@
 package com.imooc.demo.controller;
 
+import com.imooc.demo.log.ExecTime;
 import com.imooc.demo.tool.Layui;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ public class UserController extends BaseController {
     /**
      * 查询所有用户
      */
+    @ExecTime(value = "记录接口结果和时间")
     @ResponseBody
     @RequestMapping("/listByListMap")
     public Layui listByListMap(
@@ -50,6 +52,7 @@ public class UserController extends BaseController {
      * @param password
      * @return
      */
+    @ExecTime(value = "记录接口结果和时间")
     @ResponseBody
     @RequestMapping("login")
     public Map<String,Object> login(@RequestParam("username") String username,@RequestParam("password") String password){

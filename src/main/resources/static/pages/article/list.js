@@ -66,7 +66,7 @@ layui.use(['table', 'jquery','form', 'admin'], function() {
 		getCheckData: function() { //获取选中数据
 			var checkStatus = table.checkStatus('articleList'),
 				data = checkStatus.data;
-			//console.log(data);
+			//console.aspect(data);
 			//layer.alert(JSON.stringify(data));
 			if(data.length > 0) {
 				layer.confirm('确认要删除吗？' + JSON.stringify(data), function(index) {

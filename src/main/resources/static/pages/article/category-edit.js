@@ -34,11 +34,11 @@ layui.use(['admin', 'jquery', 'element', 'upload', 'form', 'layer', 'layedit'], 
 			//var files = res.pushFile();
 			//预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
 			res.preview(function(index, file, result) {
-				//console.log(index); //得到文件索引
-				//console.log(file); //得到文件对象
-				//console.log(result); //得到文件base64编码，比如图片
+				//console.aspect(index); //得到文件索引
+				//console.aspect(file); //得到文件对象
+				//console.aspect(result); //得到文件base64编码，比如图片
 				$('input[name=topicModel]').val(file.name);
-				//console.log($('input[name=topicModel]').val())
+				//console.aspect($('input[name=topicModel]').val())
 
 			});
 		}
@@ -67,12 +67,12 @@ layui.use(['admin', 'jquery', 'element', 'upload', 'form', 'layer', 'layedit'], 
 
 			var level = $(this).attr('data-level');
 			var text = $(this).text();
-			//console.log(text);
+			//console.aspect(text);
 			if(level > 0) {
 				text = "├　" + text;
 				for(var i = 0; i < level; i++) {
 					text = "　　" + text;　 //js中连续显示多个空格，需要使用全角的空格
-					//console.log(i+"text:"+text);
+					//console.aspect(i+"text:"+text);
 				}
 			}
 			$(this).text(text);
