@@ -47,7 +47,7 @@ public class CasAuthController {
     /**
      * 获取cas内部数据
      * interfaceUrl 接口url
-     * http://127.0.0.1:8001/demo/casAuth/getCasInterData?interfaceUrl=http://192.168.0.39:8080/common/notice/list?page=1%26rows=15
+     * http://127.0.0.1:8001/demo/casAuth/getCasInterData?interfaceUrl=http://dsjpt.isct.cn:18087/common/notice/list?page=1%26rows=15
      */
     @ResponseBody
     @RequestMapping("/getCasInterData")

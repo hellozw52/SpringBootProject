@@ -60,6 +60,7 @@ test:
 otherCas:
   username: police
   password: e10adc3949ba59abbe56e057f20f883e
-  casServerPath: http://192.168.0.39:8080/cas
+#  casServerPath: http://192.168.0.39:8080/cas
+  casServerPath: http://dsjpt.isct.cn:18087/cas
 
 
