@@ -56,4 +56,10 @@ test:
   name: zhangsan
   password: 123456
 
+#第三方CAS配置信息，用于获取CAS内部子系统的数据而不被拦截
+otherCas:
+  username: police
+  password: e10adc3949ba59abbe56e057f20f883e
+  casServerPath: http://192.168.0.39:8080/cas
+
 
