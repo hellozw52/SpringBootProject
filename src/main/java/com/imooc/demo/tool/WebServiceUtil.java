@@ -252,11 +252,11 @@ public class WebServiceUtil {
      *
      * @param args
      */
-    public static void main(String[] args) {
-        Map<String, String> parameters = new HashMap<String, String>();
-        parameters.put("tel", "15850781443");
-        String result =sendGet("http://mobsec-dianhua.baidu.com/dianhua_api/open/location", parameters);
-        System.out.println(result);
-    }
+//    public static void main(String[] args) {
+//        Map<String, String> parameters = new HashMap<String, String>();
+//        parameters.put("tel", "15850781443");
+//        String result =sendGet("http://mobsec-dianhua.baidu.com/dianhua_api/open/location", parameters);
+//        System.out.println(result);
+//    }
 	
 }
