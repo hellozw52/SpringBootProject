@@ -33,16 +33,21 @@ public class CasAuthController {
     //目标返回的服务器的url， 同访问的地址必须完全一致，不然就会报错。
     private static String TAGET_URL = "";
 
-//    /**
-//     * 根据账号，密码  获取CAS票据 直接登录
-//     */
-//    @RequestMapping("/login")
-//    public String login(){
-//        TAGET_URL = "http://192.168.0.39:8080/common/";
-//        //获取票据信息  直接登录
-//        String ticket = CasServerUtil.getInstance(CAS_SERVER_PATH,TAGET_URL).getSt(USERNAME, PASSWORD);
-//        return "redirect:http://192.168.0.39:8080/common?ticket="+ticket;
-//    }
+    /**
+     * 根据账号，密码  获取CAS票据   直接登录
+     */
+    @RequestMapping("/login")
+    public String login(){
+        //读取cas配置文件
+        USERNAME = ymlConfig.getProperty("otherCas.username");
+        PASSWORD = ymlConfig.getProperty("otherCas.password");
+        CAS_SERVER_PATH = ymlConfig.getProperty("otherCas.casServerPath");
+
+        TAGET_URL = ymlConfig.getProperty("otherCas.commonPath");
+        //获取票据信息  直接登录
+        String ticket = CasServerUtil.getInstance(CAS_SERVER_PATH,TAGET_URL).getSt(USERNAME,PASSWORD);
+        return "redirect:"+TAGET_URL+"?ticket="+ticket;
+    }
 
     /**
      * 获取cas内部数据
@@ -59,7 +64,7 @@ public class CasAuthController {
 
         TAGET_URL = interfaceUrl;
         //获取票据信息  通过接口url 和 票据参数  直接访问CAS内部数据
-        String ticket = CasServerUtil.getInstance(CAS_SERVER_PATH,TAGET_URL).getSt(USERNAME, PASSWORD);
+        String ticket = CasServerUtil.getInstance(CAS_SERVER_PATH,TAGET_URL).getSt(USERNAME,PASSWORD);
         interfaceUrl = TAGET_URL+"&ticket="+ticket;
 
         //后台模拟浏览器打开接口url  获取数据结果
