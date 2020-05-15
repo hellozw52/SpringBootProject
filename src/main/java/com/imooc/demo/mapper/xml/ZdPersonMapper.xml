@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.demo.mapper.ZdPersonMapper">
+
+    <select id="listZdPerson" resultType="java.util.Map">
+        select id,name,bf_account,case_num,delete_flag from zd_person
+    </select>
+
+</mapper>

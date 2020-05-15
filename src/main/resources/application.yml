@@ -43,12 +43,13 @@ spring:
   resources:
     static-locations: classpath:static/,file:static/
 
-# Mybatis
-mybatis:
+# mybatis-plus
+mybatis-plus:
   # 指定全局配置文件位置
   config-location: classpath:/mybatis-config.xml
   # 指定sql映射文件位置
-  mapper-locations: classpath:/mapper/*.xml
+#  mapper-locations: classpath:/mapper/*.xml
+  mapper-locations: classpath*:/com/imooc/demo/mapper/xml/*.xml
 
 
 #自己定义的配置

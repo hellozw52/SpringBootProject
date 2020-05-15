@@ -2,6 +2,7 @@ package com.imooc.demo.controller;
 
 import com.imooc.demo.service.AliTradingRecordService;
 import com.imooc.demo.service.UserService;
+import com.imooc.demo.service.ZdPersonService;
 import com.imooc.demo.tool.Layui;
 
 import javax.annotation.Resource;
@@ -27,6 +28,8 @@ public class BaseController {
     protected UserService userService;
     @Resource
     protected AliTradingRecordService aliTradingRecordService;
+    @Resource
+    protected ZdPersonService zdPersonService;
 
     //getter setter
     public Map<String, Object> getMap() {
