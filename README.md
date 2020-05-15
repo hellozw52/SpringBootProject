@@ -1,2 +1,2 @@
-# SpringBoot 项目
-springboot mybatis
+# SpringBoot demo项目
+springboot mybatis-plus layui
