@@ -1,6 +1,9 @@
-package com.imooc.demo.service;
+package com.imooc.demo.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.imooc.demo.domain.AlibabaTradingRecord;
 import com.imooc.demo.mapper.AlibabaTradingRecordMapper;
+import com.imooc.demo.service.AlibabaTradingRecordService;
 import com.imooc.demo.tool.FieldTool;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,14 +14,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>
+ * 支付宝交易记录表 服务实现类
+ * </p>
+ *
+ * @author hellozw
+ * @since 2020-05-18
+ */
 @Service
-@Transactional//配置事务，如果失败即回滚
-public class AliTradingRecordService {
+@Transactional
+public class AlibabaTradingRecordServiceImpl extends ServiceImpl<AlibabaTradingRecordMapper, AlibabaTradingRecord> implements AlibabaTradingRecordService {
 
     @Resource
     private AlibabaTradingRecordMapper alibabaTradingRecordMapper;
 
-    public List<Map<String, Object>> getTradeRecordCondition(String userId, String commodityName, String sellerName, String tradeState, String payMode, String tradeTotalAmountStart, String tradeTotalAmountEnd, String startTime, String endTime, String weekNum, String startDuration, String endDuration,String sort,String order, int start, int size) throws ParseException {
+    @Override
+    public List<Map<String, Object>> getTradeRecordCondition(String userId, String commodityName, String sellerName, String tradeState, String payMode, String tradeTotalAmountStart, String tradeTotalAmountEnd, String startTime, String endTime, String weekNum, String startDuration, String endDuration, String sort, String order, int start, int size) throws ParseException {
         //将驼峰命名转为下划线命名,与数据库一致
         sort = FieldTool.humpToUnderline(sort);
         //设置每页起始位置
@@ -71,6 +83,7 @@ public class AliTradingRecordService {
         return FieldTool.formatHumpNameForList(alibabaTradingRecordMapper.getTradeRecordCondition(params));
     }
 
+    @Override
     public int getTradeRecordConditionTotalNum(String userId, String commodityName, String sellerName, String tradeState, String payMode, String tradeTotalAmountStart, String tradeTotalAmountEnd, String startTime, String endTime, String weekNum, String startDuration, String endDuration,String sort,String order) throws ParseException {
 
         //将驼峰命名转为下划线命名,与数据库一致
@@ -121,7 +134,9 @@ public class AliTradingRecordService {
         return alibabaTradingRecordMapper.getTradeRecordConditionTotalNum(params);
     }
 
+    @Override
     public List<Map<String, Object>> normalQuery(String userId, String commodityName) {
         return FieldTool.formatHumpNameForList(alibabaTradingRecordMapper.normalQuery(userId,commodityName));
     }
+
 }

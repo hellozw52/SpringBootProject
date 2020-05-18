@@ -45,8 +45,8 @@ public class AliTradingRecordController extends BaseController {
         // 将参数全部传递至service层进行整理、入map
         if ((commodityName != "") || (sellerName != "") || (tradeState != "") || (tradeState != "") || (payMode != "") || (tradeTotalAmountStart != "")
                 || (tradeTotalAmountEnd != "") || (startTime != "") || (endTime != "") || (weekNum != "") || (startDuration != "") || (endDuration != "")) {
-            listMap = aliTradingRecordService.getTradeRecordCondition(userId,commodityName,sellerName,tradeState,payMode,tradeTotalAmountStart,tradeTotalAmountEnd,startTime,endTime,weekNum,startDuration,endDuration,sort,order,start,size);
-            listNum = aliTradingRecordService.getTradeRecordConditionTotalNum(userId,commodityName,sellerName,tradeState,payMode,tradeTotalAmountStart,tradeTotalAmountEnd,startTime,endTime,weekNum,startDuration,endDuration,sort,order);
+            listMap = alibabaTradingRecordService.getTradeRecordCondition(userId,commodityName,sellerName,tradeState,payMode,tradeTotalAmountStart,tradeTotalAmountEnd,startTime,endTime,weekNum,startDuration,endDuration,sort,order,start,size);
+            listNum = alibabaTradingRecordService.getTradeRecordConditionTotalNum(userId,commodityName,sellerName,tradeState,payMode,tradeTotalAmountStart,tradeTotalAmountEnd,startTime,endTime,weekNum,startDuration,endDuration,sort,order);
         }
         // 实例化data 存放数据
         map = new HashMap<String, Object>();
@@ -65,7 +65,7 @@ public class AliTradingRecordController extends BaseController {
             @RequestParam("userId") String userId,
             @RequestParam(value = "commodityName",required = false) String commodityName
     ) {
-        listMap = aliTradingRecordService.normalQuery(userId,commodityName);
+        listMap = alibabaTradingRecordService.normalQuery(userId,commodityName);
         return listMap;
     }
 

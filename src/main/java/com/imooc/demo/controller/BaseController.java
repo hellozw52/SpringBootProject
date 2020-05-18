@@ -1,6 +1,6 @@
 package com.imooc.demo.controller;
 
-import com.imooc.demo.service.AliTradingRecordService;
+import com.imooc.demo.service.AlibabaTradingRecordService;
 import com.imooc.demo.service.UserService;
 import com.imooc.demo.service.ZdPersonService;
 import com.imooc.demo.tool.Layui;
@@ -27,7 +27,7 @@ public class BaseController {
     @Resource
     protected UserService userService;
     @Resource
-    protected AliTradingRecordService aliTradingRecordService;
+    protected AlibabaTradingRecordService alibabaTradingRecordService;
     @Resource
     protected ZdPersonService zdPersonService;
 

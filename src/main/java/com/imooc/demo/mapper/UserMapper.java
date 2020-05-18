@@ -1,13 +1,15 @@
 package com.imooc.demo.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.imooc.demo.domain.User;
+import com.imooc.demo.domain.ZdPerson;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
 
     List<Map<String,Object>> currentPageList(@Param("orderField") String orderField, @Param("orderType") String orderType);
 
