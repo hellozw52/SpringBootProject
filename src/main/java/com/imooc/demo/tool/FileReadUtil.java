@@ -12,11 +12,11 @@ import java.io.IOException;
  */
 public class FileReadUtil {
 
-    public static void main(String[] args) {
-//        String filePath = FileReadUtil.class.getResource("").getPath()+"aaa.txt"; // 文件路径
-        String filePath = "D://locationinfo.txt"; // 文件路径
-        read(filePath);
-    }
+//    public static void main(String[] args) {
+////        String filePath = FileReadUtil.class.getResource("").getPath()+"aaa.txt"; // 文件路径
+//        String filePath = "D://locationinfo.txt"; // 文件路径
+//        read(filePath);
+//    }
 
     /**
      * 读取每行内容 控制台 生成插入的sql语句

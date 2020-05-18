@@ -92,8 +92,8 @@ public class FieldTool {
     }
 
 
-    public static void main(String[] args) {
-        String t = "createDate";
-        System.out.println(humpToUnderline(t));
-    }
+//    public static void main(String[] args) {
+//        String t = "createDate";
+//        System.out.println(humpToUnderline(t));
+//    }
 }
