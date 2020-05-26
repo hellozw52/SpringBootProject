@@ -183,6 +183,7 @@ public class UserController extends BaseController {
 
         ModelAndView mv = new ModelAndView();
 //        mv.addObject("sessionObject", session);
+
         mv.setViewName("404");
         return mv;
     }
