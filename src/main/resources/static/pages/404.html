@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>欢迎页面-WeAdmin Frame型后台管理系统-WeAdmin 1.0</title>
@@ -12,7 +12,7 @@
     <body>
         <div class="weadmin-body">
         	<div class="weadmin-trailer">
-			  占位页面
+			  占位页面<span th:text="${session.username}"></span>
 			</div>
         </div>
     </body>

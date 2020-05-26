@@ -5,10 +5,14 @@ import com.imooc.demo.tool.Layui;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +59,10 @@ public class UserController extends BaseController {
     @ExecTime(value = "记录接口结果和时间")
     @ResponseBody
     @RequestMapping("login")
-    public Map<String,Object> login(@RequestParam("username") String username,@RequestParam("password") String password){
+    public Map<String,Object> login(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
+            HttpServletRequest request){
         logger.info("进行登陆");
         //返回结果
         result = new HashMap<>();
@@ -63,9 +70,14 @@ public class UserController extends BaseController {
         map = userService.login(username,password);
 
         if(map!=null){
+            // 账号密码存session
+            HttpSession session = request.getSession();
+            session.setAttribute("username", username);
+            session.setAttribute("password", password);
+
             result.put("result","success");
             result.put("msg","登录成功，欢迎您： "+username);
-            result.put("url","./index.html");
+            result.put("url","./frame.html");
         }else {
             result.put("result","false");
             result.put("msg","登录失败");
@@ -158,6 +170,21 @@ public class UserController extends BaseController {
         //返回结果
         map = userService.delete(ids);
         return map;
+    }
+
+    /**
+     * 测试thymeleaf获取session中的值
+     */
+    @RequestMapping("/testSession")
+    public ModelAndView testSession(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.setAttribute("username", "zhangsan");
+        session.setAttribute("password", "123456");
+
+        ModelAndView mv = new ModelAndView();
+//        mv.addObject("sessionObject", session);
+        mv.setViewName("404");
+        return mv;
     }
 
 
