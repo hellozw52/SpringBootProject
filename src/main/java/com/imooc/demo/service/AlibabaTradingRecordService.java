@@ -21,7 +21,7 @@ public interface AlibabaTradingRecordService extends IService<AlibabaTradingReco
 
     public List<Map<String, Object>> getTradeRecordCondition(String userId, String commodityName, String sellerName, String tradeState, String payMode, String tradeTotalAmountStart, String tradeTotalAmountEnd, String startTime, String endTime, String weekNum, String startDuration, String endDuration, String sort, String order, int start, int size) throws ParseException;
 
-    public int getTradeRecordConditionTotalNum(String userId, String commodityName, String sellerName, String tradeState, String payMode, String tradeTotalAmountStart, String tradeTotalAmountEnd, String startTime, String endTime, String weekNum, String startDuration, String endDuration,String sort,String order) throws ParseException;
+    public int getTradeRecordConditionTotalNum(String userId, String commodityName, String sellerName, String tradeState, String payMode, String tradeTotalAmountStart, String tradeTotalAmountEnd, String startTime, String endTime, String weekNum, String startDuration, String endDuration, String sort, String order) throws ParseException;
 
     public List<Map<String, Object>> normalQuery(String userId, String commodityName);
 }

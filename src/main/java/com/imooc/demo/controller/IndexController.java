@@ -11,13 +11,13 @@ public class IndexController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping("login")
-    public String tologin(){
+    public String tologin() {
         logger.info("定向登陆页");
         return "login";
     }
 
     @RequestMapping("home")
-    public String home(){
+    public String home() {
         logger.info("定向主页");
         return "home";
     }

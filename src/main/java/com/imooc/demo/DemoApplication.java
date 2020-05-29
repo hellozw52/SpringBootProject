@@ -9,6 +9,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.core.env.Environment;
 
+/**
+ * @author Administrator
+ */
 @SpringBootApplication
 @MapperScan("com.imooc.demo.mapper")
 public class DemoApplication extends SpringBootServletInitializer {
@@ -26,7 +29,7 @@ public class DemoApplication extends SpringBootServletInitializer {
     }
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder){
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(DemoApplication.class);
     }
 

@@ -12,13 +12,14 @@ import java.util.Map;
 
 /**
  * 基本controller 减少代码量
+ *
  * @author zhaowei
  */
 public class BaseController {
 
     // 封装常用数据
     protected Map<String, Object> map; //一条记录
-    protected List<Map<String,Object>> listMap; //多条记录
+    protected List<Map<String, Object>> listMap; //多条记录
     protected int listNum;//记录个数
     protected Map<String, Object> result;//返回结果
     protected Layui layuiResult;//给layui返回的结果

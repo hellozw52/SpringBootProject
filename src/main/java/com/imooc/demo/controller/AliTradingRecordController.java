@@ -20,16 +20,16 @@ public class AliTradingRecordController extends BaseController {
      * 交易记录条件查询   参数较多时，使用map传参
      */
     @RequestMapping("/queryResult")
-    public Map<String,Object> queryResult(
+    public Map<String, Object> queryResult(
             @RequestParam("userId") String userId,
-            @RequestParam(value = "commodityName",required = false) String commodityName,
-            @RequestParam(value = "sellerName",required = false) String sellerName,
-            @RequestParam(value = "tradeState",required = false) String tradeState,
-            @RequestParam(value = "payMode",required = false) String payMode,
-            @RequestParam(value = "tradeTotalAmountStart",required = false) String tradeTotalAmountStart,
-            @RequestParam(value = "tradeTotalAmountEnd",required = false) String tradeTotalAmountEnd,
-            @RequestParam(value = "startTime",required = false) String startTime,
-            @RequestParam(value = "endTime",required = false) String endTime,
+            @RequestParam(value = "commodityName", required = false) String commodityName,
+            @RequestParam(value = "sellerName", required = false) String sellerName,
+            @RequestParam(value = "tradeState", required = false) String tradeState,
+            @RequestParam(value = "payMode", required = false) String payMode,
+            @RequestParam(value = "tradeTotalAmountStart", required = false) String tradeTotalAmountStart,
+            @RequestParam(value = "tradeTotalAmountEnd", required = false) String tradeTotalAmountEnd,
+            @RequestParam(value = "startTime", required = false) String startTime,
+            @RequestParam(value = "endTime", required = false) String endTime,
             @RequestParam("weekNum") String weekNum,
             @RequestParam("startDuration") String startDuration,//开始时段
             @RequestParam("endDuration") String endDuration,//结束时段
@@ -45,8 +45,8 @@ public class AliTradingRecordController extends BaseController {
         // 将参数全部传递至service层进行整理、入map
         if ((commodityName != "") || (sellerName != "") || (tradeState != "") || (tradeState != "") || (payMode != "") || (tradeTotalAmountStart != "")
                 || (tradeTotalAmountEnd != "") || (startTime != "") || (endTime != "") || (weekNum != "") || (startDuration != "") || (endDuration != "")) {
-            listMap = alibabaTradingRecordService.getTradeRecordCondition(userId,commodityName,sellerName,tradeState,payMode,tradeTotalAmountStart,tradeTotalAmountEnd,startTime,endTime,weekNum,startDuration,endDuration,sort,order,start,size);
-            listNum = alibabaTradingRecordService.getTradeRecordConditionTotalNum(userId,commodityName,sellerName,tradeState,payMode,tradeTotalAmountStart,tradeTotalAmountEnd,startTime,endTime,weekNum,startDuration,endDuration,sort,order);
+            listMap = alibabaTradingRecordService.getTradeRecordCondition(userId, commodityName, sellerName, tradeState, payMode, tradeTotalAmountStart, tradeTotalAmountEnd, startTime, endTime, weekNum, startDuration, endDuration, sort, order, start, size);
+            listNum = alibabaTradingRecordService.getTradeRecordConditionTotalNum(userId, commodityName, sellerName, tradeState, payMode, tradeTotalAmountStart, tradeTotalAmountEnd, startTime, endTime, weekNum, startDuration, endDuration, sort, order);
         }
         // 实例化data 存放数据
         map = new HashMap<String, Object>();
@@ -61,11 +61,11 @@ public class AliTradingRecordController extends BaseController {
      * 交易记录条件查询   参数较少，直接传参
      */
     @RequestMapping("/normalQuery")
-    public List<Map<String,Object>> normalQuery(
+    public List<Map<String, Object>> normalQuery(
             @RequestParam("userId") String userId,
-            @RequestParam(value = "commodityName",required = false) String commodityName
+            @RequestParam(value = "commodityName", required = false) String commodityName
     ) {
-        listMap = alibabaTradingRecordService.normalQuery(userId,commodityName);
+        listMap = alibabaTradingRecordService.normalQuery(userId, commodityName);
         return listMap;
     }
 

@@ -7,11 +7,33 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Administrator
+ */
 public interface AlibabaTradingRecordMapper extends BaseMapper<AlibabaTradingRecord> {
 
-    List<Map<String, Object>> getTradeRecordCondition(Map<String,Object> params);
+    /**
+     * 交易记录查询
+     *
+     * @param params
+     * @return
+     */
+    List<Map<String, Object>> getTradeRecordCondition(Map<String, Object> params);
 
-    int getTradeRecordConditionTotalNum(Map<String,Object> params);
+    /**
+     * 交易记录查询总个数
+     *
+     * @param params
+     * @return
+     */
+    int getTradeRecordConditionTotalNum(Map<String, Object> params);
 
-    List<Map<String, Object>> normalQuery(@Param("userId") String userId,@Param("commodityName") String commodityName);
+    /**
+     * 普通查询
+     *
+     * @param userId
+     * @param commodityName
+     * @return
+     */
+    List<Map<String, Object>> normalQuery(@Param("userId") String userId, @Param("commodityName") String commodityName);
 }

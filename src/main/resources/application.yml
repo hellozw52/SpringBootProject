@@ -54,7 +54,7 @@ spring:
     #开发配置为false,避免修改模板还要重启服务器
     cache: false
     #配置模板路径，默认是templates，可以不用配置
-#    prefix: classpath:/templates
+    #    prefix: classpath:/templates
     prefix: classpath:/static/pages/
     suffix: .html
     check-template-location: true
@@ -65,7 +65,7 @@ mybatis-plus:
   # 指定全局配置文件位置
   config-location: classpath:/mybatis-config.xml
   # 指定sql映射文件位置
-#  mapper-locations: classpath:/mapper/*.xml
+  #  mapper-locations: classpath:/mapper/*.xml
   mapper-locations: classpath*:/com/imooc/demo/mapper/xml/*.xml
 
 
@@ -78,7 +78,7 @@ test:
 otherCas:
   username: xnhdfx
   password: 2e9b1b1428a9a249d8f1c50c213cbbf5
-#  casServerPath: http://192.168.0.39:8080/cas
+  #  casServerPath: http://192.168.0.39:8080/cas
   casServerPath: http://dsjpt.isct.cn:18087/cas
   commonPath: http://dsjpt.isct.cn:18087/common/
 

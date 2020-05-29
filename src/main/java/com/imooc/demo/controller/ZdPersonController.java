@@ -22,8 +22,8 @@ import java.util.Map;
 public class ZdPersonController extends BaseController {
 
     @GetMapping("/listZdPerson")
-    @ApiOperation(value = "测试接口",notes = "测试")
-    public List<Map<String,Object>> listZdPerson(){
+    @ApiOperation(value = "测试接口", notes = "测试")
+    public List<Map<String, Object>> listZdPerson() {
         listMap = zdPersonService.listZdPerson();
         return listMap;
     }

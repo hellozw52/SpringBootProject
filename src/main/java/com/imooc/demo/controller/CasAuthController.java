@@ -37,7 +37,7 @@ public class CasAuthController {
      * 根据账号，密码  获取CAS票据   直接登录
      */
     @RequestMapping("/login")
-    public String login(){
+    public String login() {
         //读取cas配置文件
         USERNAME = ymlConfig.getProperty("otherCas.username");
         PASSWORD = ymlConfig.getProperty("otherCas.password");
@@ -45,8 +45,8 @@ public class CasAuthController {
 
         TAGET_URL = ymlConfig.getProperty("otherCas.commonPath");
         //获取票据信息  直接登录
-        String ticket = CasServerUtil.getInstance(CAS_SERVER_PATH,TAGET_URL).getSt(USERNAME,PASSWORD);
-        return "redirect:"+TAGET_URL+"?ticket="+ticket;
+        String ticket = CasServerUtil.getInstance(CAS_SERVER_PATH, TAGET_URL).getSt(USERNAME, PASSWORD);
+        return "redirect:" + TAGET_URL + "?ticket=" + ticket;
     }
 
     /**
@@ -64,8 +64,8 @@ public class CasAuthController {
 
         TAGET_URL = interfaceUrl;
         //获取票据信息  通过接口url 和 票据参数  直接访问CAS内部数据
-        String ticket = CasServerUtil.getInstance(CAS_SERVER_PATH,TAGET_URL).getSt(USERNAME,PASSWORD);
-        interfaceUrl = TAGET_URL+"&ticket="+ticket;
+        String ticket = CasServerUtil.getInstance(CAS_SERVER_PATH, TAGET_URL).getSt(USERNAME, PASSWORD);
+        interfaceUrl = TAGET_URL + "&ticket=" + ticket;
 
         //后台模拟浏览器打开接口url  获取数据结果
         String pageResult = WebServiceUtil.getPageResult(interfaceUrl);

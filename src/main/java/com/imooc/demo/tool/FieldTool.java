@@ -14,6 +14,7 @@ public class FieldTool {
 
     /**
      * 将Map中的key由下划线转换为驼峰
+     *
      * @param map
      * @return
      */
@@ -53,6 +54,7 @@ public class FieldTool {
 
     /**
      * 将List中map的key值命名方式格式化为驼峰方式
+     *
      * @param
      * @return
      */
@@ -64,7 +66,9 @@ public class FieldTool {
         return newList;
     }
 
-    /** 驼峰转下划线  fParentNoLeader   f_parent_no_leader */
+    /**
+     * 驼峰转下划线  fParentNoLeader   f_parent_no_leader
+     */
     public static String humpToLine(String str) {
         return str.replaceAll("[A-Z]", "_$0").toLowerCase();
     }

@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface UserMapper extends BaseMapper<User> {
 
-    List<Map<String,Object>> currentPageList(@Param("orderField") String orderField, @Param("orderType") String orderType);
+    List<Map<String, Object>> currentPageList(@Param("orderField") String orderField, @Param("orderType") String orderType);
 
     Map<String, Object> login(@Param("username") String username, @Param("password") String password);
 

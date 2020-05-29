@@ -20,7 +20,7 @@ import java.util.Map;
  * @since 2020-05-15
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class ZdPersonServiceImpl extends ServiceImpl<ZdPersonMapper, ZdPerson> implements ZdPersonService {
 
     @Resource

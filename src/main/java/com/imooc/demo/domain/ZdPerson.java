@@ -21,10 +21,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ZdPerson对象", description="账户信息表")
+@ApiModel(value = "ZdPerson对象", description = "账户信息表")
 public class ZdPerson implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id")
     @TableId(value = "id", type = IdType.AUTO)

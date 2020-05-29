@@ -1,4 +1,5 @@
 package com.imooc.demo.tool;
+
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -29,7 +30,7 @@ public class HttpUtils {
     public static String doPost(String url, String json) {
         HttpPost post = new HttpPost(url);
         JSONObject response = null;
-        String result =null;
+        String result = null;
         try {
             StringEntity s = new StringEntity(json, "UTF-8"); // 中文乱码在此解决
             s.setContentType("application/json");
@@ -81,14 +82,16 @@ public class HttpUtils {
             return null;
         }
     }
+
     /**
      * 设置cookie
-     * @param cookieKey 键
+     *
+     * @param cookieKey   键
      * @param cookieValue 值
-     * @param effectTime 有效时间 秒
+     * @param effectTime  有效时间 秒
      * @param response
      */
-    public static void putCookies(String cookieKey, String cookieValue, int effectTime, HttpServletResponse response){
+    public static void putCookies(String cookieKey, String cookieValue, int effectTime, HttpServletResponse response) {
         Cookie cookie = new Cookie(cookieKey, cookieValue);
         cookie.setPath("/");// tomcat下多应用共享
         try {
@@ -100,7 +103,6 @@ public class HttpUtils {
         // 将Cookie添加到Response中,使之生效
         response.addCookie(cookie); // addCookie后，如果已经存在相同名字的cookie，则最新的覆盖旧的cookie
     }
-
 
 
 }

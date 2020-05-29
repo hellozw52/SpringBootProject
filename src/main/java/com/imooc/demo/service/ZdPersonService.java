@@ -15,7 +15,12 @@ import java.util.Map;
  * @since 2020-05-15
  */
 public interface ZdPersonService extends IService<ZdPerson> {
-    
+
+    /**
+     * 查询所有账单人员
+     *
+     * @return
+     */
     List<Map<String, Object>> listZdPerson();
-    
+
 }

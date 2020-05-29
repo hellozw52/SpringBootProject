@@ -14,7 +14,7 @@ import java.net.URLEncoder;
 
 /**
  * 通过账号和密码获取CAS ticket票据
- *
+ * <p>
  * 首先客户端提交用户名、密码、及Service三个参数，
  * 如果验证成功便返回用户的TGT(Ticket Granting Ticket)至客户端,
  * 然后客户端再根据 TGT 获取用户的 ST(Service Ticket)来进行验证登录。
@@ -26,10 +26,10 @@ import java.net.URLEncoder;
 public class CasServerUtil {
 
     //登录服务器地址
-    private static String  CAS_SERVER_PATH = "http://192.168.0.39:8080/cas";
+    private static String CAS_SERVER_PATH = "http://192.168.0.39:8080/cas";
 
     //登录地址的token
-    private static String  GET_TOKEN_URL = CAS_SERVER_PATH + "/v1/tickets";
+    private static String GET_TOKEN_URL = CAS_SERVER_PATH + "/v1/tickets";
 
     //目标返回的服务器的url， 同访问的地址必须完全一致，不然就会报错。
     private static String TAGET_URL = "http://192.168.0.39:8080/common/";
@@ -38,9 +38,10 @@ public class CasServerUtil {
 
     private static CasServerUtil utils = null;
 
-    private CasServerUtil(){}
+    private CasServerUtil() {
+    }
 
-    public static CasServerUtil getInstance(String casServerPath,String targetUrl){
+    public static CasServerUtil getInstance(String casServerPath, String targetUrl) {
 
         CAS_SERVER_PATH = casServerPath;
 
@@ -48,9 +49,9 @@ public class CasServerUtil {
 
         TAGET_URL = targetUrl;
 
-        if(utils == null){
+        if (utils == null) {
             synchronized (CasServerUtil.class) {
-                if(utils == null){
+                if (utils == null) {
                     utils = new CasServerUtil();
                 }
             }
@@ -63,37 +64,40 @@ public class CasServerUtil {
      * 创建时间:下午7:26:32<br/>
      * 创建用户:yellowcong<br/>
      * 机能概要:通过用户名和密码来获取service ticket,通过这个可以免密码登录
+     *
      * @param username
      * @param password
      * @return
      */
-    public String getSt(String username,String password){
+    public String getSt(String username, String password) {
         //先获取到 token generate ticket
         String tgt = utils.getTGT(username, password);
 
-        if(StringUtils.isEmpty(tgt)){
+        if (StringUtils.isEmpty(tgt)) {
             return "";
         }
 
         return utils.getST(tgt);
     }
+
     /**
      * 创建日期:2018年2月8日<br/>
      * 创建时间:下午6:36:54<br/>
      * 创建用户:yellowcong<br/>
      * 机能概要:获取到 （Tokent generate tiker ,token生成票据）tgt
+     *
      * @return
      */
-    private String getTGT(String username,String password){
+    private String getTGT(String username, String password) {
         String tgt = "";
         OutputStreamWriter out = null;
-        BufferedWriter wirter  = null;
+        BufferedWriter wirter = null;
 //        HttpsURLConnection conn = null;
         HttpURLConnection conn = null;
         try {
             //第一步，获取到tgt
             conn = (HttpURLConnection) openConn(GET_TOKEN_URL);
-            String param ="username=" + URLEncoder.encode(username, "UTF-8");
+            String param = "username=" + URLEncoder.encode(username, "UTF-8");
             param += "&password" + "=" + URLEncoder.encode(password, "UTF-8");
 
             out = new OutputStreamWriter(conn.getOutputStream());
@@ -112,9 +116,9 @@ public class CasServerUtil {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
-                if(conn != null){
+                if (conn != null) {
                     conn.disconnect();
                 }
             } catch (Exception e) {
@@ -129,21 +133,22 @@ public class CasServerUtil {
      * 创建时间:下午7:15:16<br/>
      * 创建用户:yellowcong<br/>
      * 机能概要:根据票据生成工具，获取st
+     *
      * @param tgt
      * @return
      */
-    private String getST(String tgt){
+    private String getST(String tgt) {
         String serviceTicket = "";
         OutputStreamWriter out = null;
-        BufferedWriter wirter  = null;
+        BufferedWriter wirter = null;
         HttpURLConnection conn = null;
         try {
 
             //第一步，获取到tgt
-            conn = (HttpURLConnection) openConn(GET_TOKEN_URL+"/"+tgt);
+            conn = (HttpURLConnection) openConn(GET_TOKEN_URL + "/" + tgt);
 
             //需要访问的目标网站
-            String param ="service=" + URLEncoder.encode(TAGET_URL, "utf-8");
+            String param = "service=" + URLEncoder.encode(TAGET_URL, "utf-8");
 
             out = new OutputStreamWriter(conn.getOutputStream());
             wirter = new BufferedWriter(out);
@@ -155,15 +160,15 @@ public class CasServerUtil {
 
             //获取返回的ticket票据
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String line ="";
+            String line = "";
             while ((line = in.readLine()) != null) {
                 serviceTicket = line;
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
-                if(conn != null){
+                if (conn != null) {
                     conn.disconnect();
                 }
             } catch (Exception e) {
@@ -178,13 +183,14 @@ public class CasServerUtil {
      * 创建时间:下午7:28:36<br/>
      * 创建用户:yellowcong<br/>
      * 机能概要:通过post表单提交来获取连接
+     *
      * @param urlk
      * @return
      * @throws Exception
      */
     private URLConnection openConn(String urlk) throws Exception {
 //        URL url = new URL(urlk);
-        URL url= new URL(null, urlk, new sun.net.www.protocol.http.Handler());
+        URL url = new URL(null, urlk, new sun.net.www.protocol.http.Handler());
         HttpURLConnection hsu = (HttpURLConnection) url.openConnection();
 
         hsu.setDoInput(true);

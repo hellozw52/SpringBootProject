@@ -10,13 +10,15 @@ import javax.sql.DataSource;
 
 /**
  * 配置druid连接池
+ *
+ * @author Administrator
  */
 @Configuration
 public class DruidConfig {
     @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
-    public DataSource druid(){
-        return  new DruidDataSource();
+    public DataSource druid() {
+        return new DruidDataSource();
     }
 
 }

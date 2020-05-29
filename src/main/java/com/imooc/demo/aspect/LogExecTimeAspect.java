@@ -9,11 +9,12 @@ import org.springframework.stereotype.Component;
 
 /**
  * 记录接口响应时间和结果
+ *
  * @author zhaowei
  */
 @Component
 @Aspect
-public class LogExecTimeAspect{
+public class LogExecTimeAspect {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -34,13 +35,13 @@ public class LogExecTimeAspect{
         logger.info("Method Name : [" + methodName + "] ---> AOP after ");
     }
 
-    @AfterReturning(pointcut = "pointCut()",returning = "result")
+    @AfterReturning(pointcut = "pointCut()", returning = "result")
     public void afterReturn(JoinPoint joinPoint, Object result) {
         String methodName = joinPoint.getSignature().getName();
         logger.info("Method Name : [" + methodName + "] ---> AOP after return ,and result is : " + result.toString());
     }
 
-    @AfterThrowing(pointcut = "pointCut()",throwing = "throwable")
+    @AfterThrowing(pointcut = "pointCut()", throwing = "throwable")
     public void afterThrowing(JoinPoint joinPoint, Throwable throwable) {
         String methodName = joinPoint.getSignature().getName();
         logger.info("Method Name : [" + methodName + "] ---> AOP after throwing ,and throwable message is : " + throwable.getMessage());
@@ -59,7 +60,7 @@ public class LogExecTimeAspect{
             logger.info("Method Name : [" + methodName + "] ---> AOP around end , and result is : " + result.toString());
             return result;
         } catch (Throwable te) {
-            logger.error(te.getMessage(),te);
+            logger.error(te.getMessage(), te);
             throw new RuntimeException(te.getMessage());
         }
     }
