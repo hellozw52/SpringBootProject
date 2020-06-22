@@ -1,6 +1,8 @@
 package com.imooc.demo.controller;
 
+import com.imooc.demo.domain.User;
 import com.imooc.demo.log.ExecTime;
+import com.imooc.demo.tool.JSONResult;
 import com.imooc.demo.tool.Layui;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -190,6 +193,26 @@ public class UserController extends BaseController {
 
         mv.setViewName("404");
         return mv;
+    }
+
+    /** 
+    * @Author zhaowei
+    * @Description 测试json封装类 
+    * @Date 2020/6/22 18:13
+    * @Param [] 
+    * @return com.imooc.demo.tool.JSONResult 
+    */ 
+    @ResponseBody
+    @RequestMapping("/testJsonResult")
+    public JSONResult testJsonResult() {
+
+        User u = new User();
+        u.setId(909808);
+        u.setUsername("bilibili");
+        u.setPassword("666");
+        u.setRegisterTime(new Date());
+
+        return JSONResult.ok(u);
     }
 
 
