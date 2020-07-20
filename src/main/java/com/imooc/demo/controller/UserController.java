@@ -1,13 +1,11 @@
 package com.imooc.demo.controller;
 
-import com.imooc.demo.domain.User;
 import com.imooc.demo.log.ExecTime;
-import com.imooc.demo.tool.JSONResult;
 import com.imooc.demo.tool.Layui;
+import com.imooc.demo.tool.LayuiResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,27 +27,25 @@ public class UserController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * 查询所有用户
+     * @return com.imooc.demo.tool.LayuiResult
+     * @throws
+     * @description 查询当前页面用户
+     * @Param [page, limit, orderField, orderType]
+     * @date 2020/7/20 20:10
+     * @author zw
      */
     @ExecTime(value = "记录接口结果和时间")
     @ResponseBody
     @RequestMapping("/listByListMap")
-    public Layui listByListMap(
+    public LayuiResult listByListMap(
             @RequestParam("page") int page,
             @RequestParam("limit") int limit,
             @RequestParam("orderField") String orderField,
             @RequestParam("orderType") String orderType
     ) {
-
-        logger.info("查询开始");
-
-        layuiResult = new Layui();//返回layui结果
-
         listMap = userService.currentPageList(page, limit, orderField, orderType);
         listNum = userService.getUserTotalNum();
-
-        return layuiResult.data(listNum, listMap);
-
+        return new LayuiResult().ok(listMap, listNum);
     }
 
     /**
@@ -194,26 +189,5 @@ public class UserController extends BaseController {
         mv.setViewName("404");
         return mv;
     }
-
-    /** 
-    * @Author zhaowei
-    * @Description 测试json封装类 
-    * @Date 2020/6/22 18:13
-    * @Param [] 
-    * @return com.imooc.demo.tool.JSONResult 
-    */ 
-    @ResponseBody
-    @RequestMapping("/testJsonResult")
-    public JSONResult testJsonResult() {
-
-        User u = new User();
-        u.setId(909808);
-        u.setUsername("bilibili");
-        u.setPassword("666");
-        u.setRegisterTime(new Date());
-
-        return JSONResult.ok(u);
-    }
-
 
 }

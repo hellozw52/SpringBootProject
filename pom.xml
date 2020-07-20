@@ -147,6 +147,13 @@
             <version>1.7.3</version>
         </dependency>
 
+        <!-- UserAgent工具类 -->
+        <dependency>
+            <groupId>cz.mallat.uasparser</groupId>
+            <artifactId>uasparser</artifactId>
+            <version>0.6.2</version>
+        </dependency>
+
 
     </dependencies>
 
