@@ -1,7 +1,6 @@
 package com.imooc.demo.controller;
 
 import com.imooc.demo.log.ExecTime;
-import com.imooc.demo.tool.Layui;
 import com.imooc.demo.tool.LayuiResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用户控制器
+ * @param
+ * @author zw
+ * @description 用户控制器
+ * @date 2020/7/21 9:00
+ * @return
  */
 @Controller
 @RequestMapping("/user")
@@ -49,11 +52,11 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 登录
-     *
-     * @param username
-     * @param password
-     * @return
+     * @param [username, password, request]
+     * @return java.util.Map<java.lang.String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                               java.lang.Object>
+     * @description 登录
+     * @date 2020/7/21 8:57
+     * @author zw
      */
     @ExecTime(value = "记录接口结果和时间")
     @ResponseBody
@@ -86,11 +89,11 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 新增
-     *
-     * @param username
-     * @param password
-     * @return
+     * @param [username, password]
+     * @return java.util.Map<java.lang.String                                                                                                                               ,                                                                                                                               java.lang.Object>
+     * @description 新增
+     * @date 2020/7/21 8:58
+     * @author zw
      */
     @ResponseBody
     @RequestMapping("add")
@@ -102,11 +105,15 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 查询
+     * @param [username, startime, endtime, page, limit, orderField, orderType]
+     * @return com.imooc.demo.tool.LayuiResult
+     * @description 查询
+     * @date 2020/7/21 8:59
+     * @author zw
      */
     @ResponseBody
     @RequestMapping("/search")
-    public Layui search(
+    public LayuiResult search(
             @RequestParam("username") String username,
             @RequestParam("startime") String startime,
             @RequestParam("endtime") String endtime,
@@ -128,22 +135,20 @@ public class UserController extends BaseController {
             endtime = "2300-01-01";
         }
 
-        layuiResult = new Layui();//返回layui结果
 
         listMap = userService.search(username, startime, endtime, orderField, orderType, pagecc, limitcc);
         listNum = userService.searchTotalNum(username, startime, endtime);
 
-        return layuiResult.data(listNum, listMap);
+        return new LayuiResult(listMap, listNum);
 
     }
 
     /**
-     * 修改
-     *
-     * @param id
-     * @param username
-     * @param password
-     * @return
+     * @param [id, username, password]
+     * @return java.util.Map<java.lang.String                               ,                               java.lang.Object>
+     * @description 修改
+     * @date 2020/7/21 8:59
+     * @author zw
      */
     @ResponseBody
     @RequestMapping("update")
@@ -158,12 +163,11 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 批量删除
-     *
-     * @param id
-     * @param username
-     * @param password
-     * @return
+     * @param [ids]
+     * @return java.util.Map<java.lang.String               ,               java.lang.Object>
+     * @description 批量删除
+     * @date 2020/7/21 8:59
+     * @author zw
      */
     @ResponseBody
     @RequestMapping("delete")
@@ -175,7 +179,11 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 测试thymeleaf获取session中的值
+     * @param [request]
+     * @return org.springframework.web.servlet.ModelAndView
+     * @description 测试thymeleaf获取session中的值
+     * @date 2020/7/21 8:59
+     * @author zw
      */
     @RequestMapping("/testSession")
     public ModelAndView testSession(HttpServletRequest request) {

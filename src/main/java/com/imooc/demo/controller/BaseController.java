@@ -11,11 +11,14 @@ import java.util.Map;
 
 
 /**
- * 基本controller 减少代码量
- *
- * @author zhaowei
+ * @author zw
+ * @description 基本controller 减少代码量
+ * @Param
+ * @date 2020/7/21 8:39
+ * @return
+ * @throws
  */
-public class BaseController {
+public abstract class BaseController {
 
     // 封装常用数据
     protected Map<String, Object> map; //一条记录

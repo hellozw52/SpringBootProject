@@ -8,10 +8,10 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="./static/images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="./static/css/font.css">
     <link rel="stylesheet" href="./static/css/weadmin.css">
-    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./layui/layui.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -76,11 +76,11 @@
 <div class="page-content">
     <div class="layui-tab tab" lay-filter="wenav_tab" id="WeTabTip" lay-allowclose="true">
         <ul class="layui-tab-title" id="tabName">
-            <li>我的桌面</li>
+            <li>会员管理</li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='./pages/welcome.html' frameborder="0" scrolling="yes" class="weIframe"></iframe>
+                <iframe src='./pages/member/list.html' frameborder="0" scrolling="yes" class="weIframe"></iframe>
             </div>
         </div>
     </div>
@@ -106,7 +106,7 @@
             admin = layui.admin,
             menu = layui.menu;
         $(function () {
-            menu.getMenu('./json/menu.json');
+            menu.getMenu('./menu.json');
             var login = JSON.parse(localStorage.getItem("login"));
             if (login) {
                 if (login === 0) {

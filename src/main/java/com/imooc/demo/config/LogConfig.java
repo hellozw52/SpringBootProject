@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @throws
  */
 @Configuration
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
+public class LogConfig extends WebMvcConfigurerAdapter {
 
     // 搜集日志  需要时放开代码
 //    @Autowired
