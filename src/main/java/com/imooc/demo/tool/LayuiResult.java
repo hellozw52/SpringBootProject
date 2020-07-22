@@ -6,13 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * @author zw
- * @description 返回给layui的结果  成功
+ * @Description 返回给layui的json结果
+ * @Author zw
+ * @Date 2020/7/22 20:14
  * @Param
- * @date 2020/7/20 19:36
- * @return
- * @throws
- */
+ * @Return
+**/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

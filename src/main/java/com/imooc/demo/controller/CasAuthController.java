@@ -13,11 +13,12 @@ import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
- * @ClassName : CasAuthController
- * @Description : cas验证控制器
- * @Author : ZW
- * @Date: 2020-05-08 08:53
- */
+ * @Description cas验证控制器
+ * @Author zw
+ * @Date 2020/7/22 20:12
+ * @Param
+ * @Return
+**/
 @Controller
 @RequestMapping("/casAuth")
 public class CasAuthController {
@@ -34,8 +35,12 @@ public class CasAuthController {
     private static String TAGET_URL = "";
 
     /**
-     * 根据账号，密码  获取CAS票据   直接登录
-     */
+     * @Description 根据账号，密码  获取CAS票据   直接登录
+     * @Author zw
+     * @Date 2020/7/22 20:12
+     * @Param []
+     * @Return java.lang.String
+    **/
     @RequestMapping("/login")
     public String login() {
         //读取cas配置文件
@@ -50,10 +55,12 @@ public class CasAuthController {
     }
 
     /**
-     * 获取cas内部数据
-     * interfaceUrl 接口url
-     * http://127.0.0.1:8001/demo/casAuth/getCasInterData?interfaceUrl=http://dsjpt.isct.cn:18087/common/notice/list?page=1%26rows=15
-     */
+     * @Description 获取cas内部数据  http://127.0.0.1:8001/demo/casAuth/getCasInterData?interfaceUrl=http://dsjpt.isct.cn:18087/common/notice/list?page=1%26rows=15
+     * @Author zw
+     * @Date 2020/7/22 20:12
+     * @Param [interfaceUrl]
+     * @Return com.alibaba.fastjson.JSON
+    **/
     @ResponseBody
     @RequestMapping("/getCasInterData")
     public JSON getCasInterData(String interfaceUrl) throws IOException {

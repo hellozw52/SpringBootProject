@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,12 +16,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @param
- * @author zw
- * @description 用户控制器
- * @date 2020/7/21 9:00
- * @return
- */
+ * @Description 用户控制器
+ * @Author zw
+ * @Date 2020/7/22 20:07
+ * @Param
+ * @Return
+**/
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
@@ -30,13 +29,12 @@ public class UserController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * @return com.imooc.demo.tool.LayuiResult
-     * @throws
-     * @description 查询当前页面用户
+     * @Description 查询当前页面用户
+     * @Author zw
+     * @Date 2020/7/22 20:06
      * @Param [page, limit, orderField, orderType]
-     * @date 2020/7/20 20:10
-     * @author zw
-     */
+     * @Return com.imooc.demo.tool.LayuiResult
+    **/
     @ExecTime(value = "记录接口结果和时间")
     @ResponseBody
     @RequestMapping("/listByListMap")
@@ -52,12 +50,12 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @param [username, password, request]
-     * @return java.util.Map<java.lang.String , java.lang.Object>
-     * @description 登录
-     * @date 2020/7/21 8:57
-     * @author zw
-     */
+     * @Description 登录
+     * @Author zw
+     * @Date 2020/7/22 20:05
+     * @Param [username, password, request]
+     * @Return java.util.Map<java.lang.String,java.lang.Object>
+    **/
     @ExecTime(value = "记录接口结果和时间")
     @ResponseBody
     @RequestMapping("login")
@@ -89,12 +87,12 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @param [username, password]
-     * @return java.util.Map<java.lang.String ， java.lang.Object>
-     * @description 新增
-     * @date 2020/7/21 8:58
-     * @author zw
-     */
+     * @Description 新增
+     * @Author zw
+     * @Date 2020/7/22 20:08
+     * @Param [username, password]
+     * @Return java.util.Map<java.lang.String,java.lang.Object>
+    **/
     @ResponseBody
     @RequestMapping("add")
     public Map<String, Object> add(@RequestParam("username") String username, @RequestParam("password") String password) {
@@ -105,12 +103,12 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @param [username, startime, endtime, page, limit, orderField, orderType]
-     * @return com.imooc.demo.tool.LayuiResult
-     * @description 查询
-     * @date 2020/7/21 8:59
-     * @author zw
-     */
+     * @Description 查询
+     * @Author zw
+     * @Date 2020/7/22 20:08
+     * @Param [username, startime, endtime, page, limit, orderField, orderType]
+     * @Return com.imooc.demo.tool.LayuiResult
+    **/
     @ResponseBody
     @RequestMapping("/search")
     public LayuiResult search(
@@ -144,12 +142,12 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @param [id, username, password]
-     * @return java.util.Map<java.lang.String , java.lang.Object>
-     * @description 修改
-     * @date 2020/7/21 8:59
-     * @author zw
-     */
+     * @Description 修改
+     * @Author zw
+     * @Date 2020/7/22 20:08
+     * @Param [id, username, password]
+     * @Return java.util.Map<java.lang.String,java.lang.Object>
+    **/
     @ResponseBody
     @RequestMapping("update")
     public Map<String, Object> update(
@@ -163,12 +161,12 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @param [ids]
-     * @return java.util.Map<java.lang.String , java.lang.Object>
-     * @description 批量删除
-     * @date 2020/7/21 8:59
-     * @author zw
-     */
+     * @Description 批量删除
+     * @Author zw
+     * @Date 2020/7/22 20:08
+     * @Param [ids]
+     * @Return java.util.Map<java.lang.String,java.lang.Object>
+    **/
     @ResponseBody
     @RequestMapping("delete")
     public Map<String, Object> delete(@RequestParam("ids") List<String> ids) {
@@ -179,33 +177,12 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @param [request]
-     * @return org.springframework.web.servlet.ModelAndView
-     * @description 测试thymeleaf获取session中的值
-     * @date 2020/7/21 8:59
-     * @author zw
-     */
-    @RequestMapping("/testSession")
-    public ModelAndView testSession(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.setAttribute("username", "zhangsan");
-        session.setAttribute("password", "123456");
-
-        ModelAndView mv = new ModelAndView();
-//        mv.addObject("sessionObject", session);
-
-        mv.setViewName("404");
-        return mv;
-    }
-
-
-    /**
-     * @param [request]
-     * @return java.util.Map<java.lang.String , java.lang.Object>
-     * @description 获取session中的账号
-     * @date 2020/7/22 9:07
-     * @author zw
-     */
+     * @Description 获取session中的账号
+     * @Author zw
+     * @Date 2020/7/22 20:09
+     * @Param [request]
+     * @Return java.util.Map<java.lang.String,java.lang.Object>
+    **/
     @ResponseBody
     @RequestMapping("getLoginInfo")
     public Map<String, Object> getLoginInfo(
@@ -227,12 +204,12 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @param [request]
-     * @return com.imooc.demo.tool.LayuiResult
-     * @description 退出系统
-     * @date 2020/7/22 17:35
-     * @author zw
-     */
+     * @Description 退出系统
+     * @Author zw
+     * @Date 2020/7/22 20:09
+     * @Param [request]
+     * @Return com.imooc.demo.tool.LayuiResult
+    **/
     @ResponseBody
     @RequestMapping("/logOut")
     public LayuiResult logOut(HttpServletRequest request) {

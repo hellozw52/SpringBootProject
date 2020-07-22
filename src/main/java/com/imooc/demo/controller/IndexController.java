@@ -22,12 +22,4 @@ public class IndexController {
         return "home";
     }
 
-//    @RequestMapping("logout")
-//    public String logout(){
-//        logger.info("退出系统");
-//        Subject subject = SecurityUtils.getSubject();
-//        subject.logout(); // shiro底层删除session的会话信息
-//        return "redirect:login";
-//    }
-
 }

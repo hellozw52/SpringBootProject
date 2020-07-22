@@ -11,13 +11,12 @@ import java.util.Map;
 
 
 /**
- * @author zw
- * @description 基本controller 减少代码量
+ * @Description 控制层父类
+ * @Author zw
+ * @Date 2020/7/22 20:11
  * @Param
- * @date 2020/7/21 8:39
- * @return
- * @throws
- */
+ * @Return
+**/
 public abstract class BaseController {
 
     // 封装常用数据
