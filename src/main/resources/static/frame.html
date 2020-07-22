@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>后台管理系统</title>
@@ -24,42 +24,24 @@
         <!-- <i title="展开左侧栏" class="iconfont">&#xe699;</i> -->
         <i title="展开左侧栏" class="layui-icon layui-icon-shrink-right"></i>
     </div>
-    <ul class="layui-nav left fast-add" lay-filter="">
-        <li class="layui-nav-item">
-            <a href="javascript:;">+新增</a>
-            <dl class="layui-nav-child">
-                <!-- 二级菜单 -->
-                <dd>
-                    <a onclick="WeAdminShow('资讯','https://www.baidu.com/')"><i class="layui-icon layui-icon-list"></i>资讯</a>
-                </dd>
-                <dd>
-                    <a onclick="WeAdminShow('图片','http://www.baidu.com')"><i
-                            class="layui-icon layui-icon-picture-fine"></i>图片</a>
-                </dd>
-                <dd>
-                    <a onclick="WeAdminShow('用户','https://www.jiuwei.com/')"><i class="layui-icon layui-icon-user"></i>用户</a>
-                </dd>
-            </dl>
-        </li>
-    </ul>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;"><span th:text="${session.username}"></span></a>
+            <a href="javascript:;"><span id="loginUserName"></span></a>
             <dl class="layui-nav-child">
                 <!-- 二级菜单 -->
+                <!--<dd>-->
+                <!--<a onclick="WeAdminShow('个人信息','http://www.baidu.com')">个人信息</a>-->
+                <!--</dd>-->
+                <!--<dd>-->
+                <!--<a onclick="WeAdminShow('切换帐号','./login.html')">切换帐号</a>-->
+                <!--</dd>-->
                 <dd>
-                    <a onclick="WeAdminShow('个人信息','http://www.baidu.com')">个人信息</a>
-                </dd>
-                <dd>
-                    <a onclick="WeAdminShow('切换帐号','./login.html')">切换帐号</a>
-                </dd>
-                <dd>
-                    <a class="loginout" href="./login.html">退出</a>
+                    <a id="logOut" class="loginout" href="">退出系统</a>
                 </dd>
             </dl>
         </li>
         <li class="layui-nav-item to-index">
-            <a href="https://www.jiuwei.com/" target="_blank">前台首页</a>
+            <a href="https://www.baidu.com/" target="_blank">百度</a>
         </li>
     </ul>
 
@@ -104,21 +86,62 @@
     layui.use(['jquery', 'admin', 'menu'], function () {
         var $ = layui.jquery,
             admin = layui.admin,
+            layer = layui.layer,
             menu = layui.menu;
         $(function () {
-            menu.getMenu('./menu.json');
-            var login = JSON.parse(localStorage.getItem("login"));
-            if (login) {
-                if (login === 0) {
+
+                // 获取登录账号信息
+                $.ajax({
+                    url: './user/getLoginInfo',
+                    type: 'get',
+                    dataType: "json",
+                    data: {},
+                    success: function (data) {
+                        // debugger
+                        if (data.username != null) {
+                            $("#loginUserName").html(data.username);
+                        } else {
+                            layer.msg("登录失效，请重新登录！");
+                            layer.closeAll();
+                            window.location.href = './login.html';
+                        }
+                    },
+                    error: function () {
+                        alert("没有获取到账号！")
+                    }
+                })
+
+                // 加载左侧菜单栏
+                menu.getMenu('./menu.json');
+                var login = JSON.parse(localStorage.getItem("login"));
+                if (login) {
+                    if (login === 0) {
+                        window.location.href = './login.html';
+                        return false;
+                    } else {
+                        return false;
+                    }
+                } else {
                     window.location.href = './login.html';
                     return false;
-                } else {
-                    return false;
                 }
-            } else {
-                window.location.href = './login.html';
-                return false;
             }
+        );
+
+        //退出系统
+        $("#logOut").on('click', function () {
+            $.ajax({
+                url: './user/logOut',
+                type: 'post',
+                dataType: "json",
+                success: function (res) {
+                    // debugger
+                    if (res.code == 0) {
+                        window.location.href = res.data;
+                    }
+                }
+            })
+
         });
     });
 
