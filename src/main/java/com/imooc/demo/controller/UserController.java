@@ -120,7 +120,6 @@ public class UserController extends BaseController {
             @RequestParam("orderField") String orderField,
             @RequestParam("orderType") String orderType
     ) {
-
         logger.info("查询开始");
 
         int pagecc = Integer.parseInt((page == null || page == "0") ? "1" : page);// 开始位置
@@ -133,12 +132,10 @@ public class UserController extends BaseController {
             endtime = "2300-01-01";
         }
 
-
         listMap = userService.search(username, startime, endtime, orderField, orderType, pagecc, limitcc);
         listNum = userService.searchTotalNum(username, startime, endtime);
 
         return new LayuiResult(listMap, listNum);
-
     }
 
     /**
