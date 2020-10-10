@@ -90,10 +90,11 @@
                     dataType: "json",
                     data: {},
                     success: function (data) {
-                        // debugger
-                        if (data.username != null) {
-                            $("#loginUserName").html(data.username);
+                        debugger
+                        if (data.status == 200) {
+                            $("#loginUserName").html(data.data);
                         } else {
+                            debugger
                             layer.msg("登录失效，请重新登录！");
                             layer.closeAll();
                             window.location.href = './login.html';
@@ -106,36 +107,44 @@
 
                 // 加载左侧菜单栏
                 menu.getMenu('./menu.json');
-                var login = JSON.parse(localStorage.getItem("login"));
-                if (login) {
-                    if (login === 0) {
-                        window.location.href = './login.html';
-                        return false;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    window.location.href = './login.html';
-                    return false;
-                }
+
             }
         );
 
         //退出系统
-        $("#logOut").on('click', function () {
-            $.ajax({
-                url: './user/logOut',
-                type: 'post',
-                dataType: "json",
-                success: function (res) {
-                    // debugger
-                    if (res.code == 0) {
-                        window.location.href = res.data;
-                    }
-                }
-            })
+        // $("#logOut").on('click', function () {
+        //     $.ajax({
+        //         url: './user/logOut',
+        //         type: 'post',
+        //         dataType: "json",
+        //         success: function (res) {
+        //             // debugger
+        //             if (res.code == 0) {
+        //                 window.location.href = res.data;
+        //             }
+        //         }
+        //     })
+        //
+        // });
 
-        });
+        //cas退出   先清除所有session信息，再调用单点登录退出
+        $('#logOut').click(function () {
+            $.ajax({
+                "url": "./user/logOut",
+                "type": "get",
+                "success": function (result) {
+                    if (result.status == 200) {
+                        window.location.href =
+                            result.data.casUrl + '/logout?service=' + result.data.demoUrl;
+                    }
+                },
+                "error": function () {
+                    window.location.href =
+                        result.data.casUrl + '/logout?service=' + result.data.demoUrl;
+                }
+
+            })
+        })
     });
 
 </script>

@@ -1,16 +1,21 @@
 package com.imooc.demo.controller;
 
 import com.imooc.demo.log.ExecTime;
+import com.imooc.demo.tool.JsonResult;
 import com.imooc.demo.tool.LayuiResult;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -174,45 +179,48 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @Description 获取session中的账号
+     * @Description 通过shiro获取当前登录的账号
      * @Author zw
-     * @Date 2020/7/22 20:09
+     * @Date 2020/10/10 14:11
      * @Param [request]
-     * @Return java.util.Map<java.lang.String,java.lang.Object>
+     * @Return com.imooc.demo.tool.JsonResult
     **/
     @ResponseBody
     @RequestMapping("getLoginInfo")
-    public Map<String, Object> getLoginInfo(
+    public JsonResult getLoginInfo(
             HttpServletRequest request) {
-        //返回结果
-        result = new HashMap<>();
-        //session中的账号
-        String username = null;
 
-        HttpSession session = request.getSession();
+        //shiro获取登录的username
+        String username = (String) SecurityUtils.getSubject().getPrincipal();
 
-        if (session.getAttribute("username") != null) {
-            username = session.getAttribute("username").toString();
+        if(StringUtils.isEmpty(username)){
+            return JsonResult.errorMsg("用户未登录！");
         }
 
-        result.put("username", username);
-
-        return result;
+        return JsonResult.ok(username);
     }
 
     /**
-     * @Description 退出系统
+     * @Description 单点登录退出  清除所有session
      * @Author zw
-     * @Date 2020/7/22 20:09
+     * @Date 2020/10/10 14:49
      * @Param [request]
-     * @Return com.imooc.demo.tool.LayuiResult
+     * @Return com.imooc.demo.tool.JsonResult
     **/
     @ResponseBody
     @RequestMapping("/logOut")
-    public LayuiResult logOut(HttpServletRequest request) {
-        //清空session中的登录信息
-        request.getSession().setAttribute("username", null);
-        return new LayuiResult().ok("./login.html");
+    public JsonResult logOut(HttpServletRequest request){
+        // 清除session
+        Enumeration<String> enumeration = request.getSession().getAttributeNames();
+        while (enumeration.hasMoreElements()) {
+            String key = enumeration.nextElement().toString();
+            request.getSession().removeAttribute(key);
+        }
+        //存放cas和子系统地址  用来单点退出
+        result = new HashMap<>();
+        result.put("casUrl",casUrl);
+        result.put("demoUrl",demoUrl);
+        return new JsonResult().ok(result);
     }
 
 }
