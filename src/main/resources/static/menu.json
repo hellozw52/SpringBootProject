@@ -4,21 +4,15 @@
   "data": [
     {
       "id": 1,
-      "name": "会员管理",
+      "name": "用户管理",
       "icon": "&#xe6b8;",
       "url": "",
       "children": [
         {
           "id": 2,
-          "name": "会员列表",
+          "name": "用户列表",
           "icon": "",
           "url": "./pages/member/list.html"
-        },
-        {
-          "id": 3,
-          "name": "账单列表",
-          "icon": "",
-          "url": "./pages/member/billlist.html"
         },
         {
           "id": 4,

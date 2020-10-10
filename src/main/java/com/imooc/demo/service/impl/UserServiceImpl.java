@@ -6,6 +6,7 @@ import com.imooc.demo.domain.User;
 import com.imooc.demo.mapper.UserMapper;
 import com.imooc.demo.service.UserService;
 import com.imooc.demo.tool.FieldTool;
+import com.imooc.demo.tool.MD5Util;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,6 +67,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         } else {
             User user = new User();
             user.setUsername(username);
+            //进行md5加密 入库
+            password = MD5Util.string2MD5(password);
             user.setPassword(password);
             //插入
             userMapper.add(user);
@@ -123,7 +126,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User user = new User();
         user.setId(Integer.parseInt(id));
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(MD5Util.string2MD5(password));
         //更新行数
         int updateNum = userMapper.update(user);
 
