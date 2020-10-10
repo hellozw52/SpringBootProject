@@ -1,5 +1,5 @@
 layui.extend({
-    admin: '{/}../../static/js/admin'
+    admin: '{/}../../js/admin'
 });
 layui.use(['admin', 'jquery', 'element', 'upload', 'form', 'layer', 'layedit'], function () {
 

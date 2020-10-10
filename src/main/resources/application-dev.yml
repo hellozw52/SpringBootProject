@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8081
   #  项目访问前缀
   servlet:
     context-path: /demo
@@ -81,7 +81,7 @@ shiro:
   # cas服务前缀
   casServerUrlPrefix: http://192.168.0.249:18080/cas
   # shiro服务前缀
-  shiroServerUrlPrefix: http://192.168.0.39:8001/demo
+  shiroServerUrlPrefix: http://192.168.0.39:8081/demo
   # 登录地址
   loginUrl: ${shiro.casServerUrlPrefix}/login?service=${shiro.shiroServerUrlPrefix}${shiro.casFilterUrlPattern}
   # 登出地址
@@ -90,18 +90,18 @@ shiro:
 # shiro放行白名单
 shiro-ignorl-url:
   urls:
-  - /static/css/**
-  - /static/js/**
-  - /static/images/**
-  - /static/fonts/**
-  - /static/layui/**
-  - /static/menu.json
+  - /css/**
+  - /js/**
+  - /images/**
+  - /fonts/**
+  - /layui/**
   - /user/**
+  - /menu.json
 
 #各子系统地址
 systemUrl:
   casUrl: http://192.168.0.249:18080/cas
-  demoUrl: http://192.168.0.39:8001/demo
+  demoUrl: http://192.168.0.39:8081/demo
 
 # mybatis-plus
 mybatis-plus:

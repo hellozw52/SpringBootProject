@@ -66,11 +66,11 @@ var layout = [{
 ];
 //加载扩展模块 treeGird
 //		layui.config({
-//			  base: './static/js/'
+//			  base: './js/'
 //			  ,version: '101100'
 //			}).use('admin');
 layui.extend({
-    admin: '{/}../../static/js/admin',
+    admin: '{/}../../js/admin',
     treeGird: '{/}../../layui/lay/treeGird' // {/}的意思即代表采用自有路径，即不跟随 base 路径
 });
 layui.use(['treeGird', 'jquery', 'admin', 'layer'], function () {
