@@ -108,7 +108,7 @@ mybatis-plus:
   # 指定全局配置文件位置
   config-location: classpath:/mybatis-config.xml
   # 指定sql映射文件位置
-  mapper-locations: classpath*:/com/imooc/demo/mapper/xml/*.xml
+  mapper-locations: classpath:/mapper/*.xml
 
 
 # 第三方CAS配置信息，用于获取CAS内部子系统的数据而不被拦截

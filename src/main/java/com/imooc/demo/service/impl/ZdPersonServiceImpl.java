@@ -1,7 +1,7 @@
 package com.imooc.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.imooc.demo.domain.ZdPerson;
+import com.imooc.demo.entity.ZdPerson;
 import com.imooc.demo.mapper.ZdPersonMapper;
 import com.imooc.demo.service.ZdPersonService;
 import org.springframework.stereotype.Service;

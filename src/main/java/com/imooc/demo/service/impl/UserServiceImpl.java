@@ -2,7 +2,7 @@ package com.imooc.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
-import com.imooc.demo.domain.User;
+import com.imooc.demo.entity.User;
 import com.imooc.demo.mapper.UserMapper;
 import com.imooc.demo.service.UserService;
 import com.imooc.demo.tool.FieldTool;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

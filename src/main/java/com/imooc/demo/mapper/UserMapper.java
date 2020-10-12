@@ -1,9 +1,7 @@
 package com.imooc.demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.imooc.demo.domain.User;
-import com.imooc.demo.domain.ZdPerson;
-import org.apache.ibatis.annotations.Mapper;
+import com.imooc.demo.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

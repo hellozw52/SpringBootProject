@@ -1,4 +1,4 @@
-package com.imooc.demo.domain;
+package com.imooc.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 

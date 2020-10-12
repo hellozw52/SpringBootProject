@@ -1,7 +1,7 @@
 package com.imooc.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.imooc.demo.domain.User;
+import com.imooc.demo.entity.User;
 
 import java.util.List;
 import java.util.Map;
