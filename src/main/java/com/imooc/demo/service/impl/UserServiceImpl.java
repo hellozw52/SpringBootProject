@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,11 +72,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             password = MD5Util.string2MD5(password);
             user.setPassword(password);
             //插入
-            userMapper.add(user);
-            //插入结果的自增id
-            int insertResultId = user.getId();
+//            userMapper.add(user);
 
-            if (insertResultId > 0) {
+            //采用mp封装好的方法  插入后  影响的行数
+            int affectRows = userMapper.insert(user);
+
+            if (affectRows > 0) {
                 result.put("result", true);
                 result.put("msg", "账号添加成功！");
             } else {
@@ -128,9 +130,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setUsername(username);
         user.setPassword(MD5Util.string2MD5(password));
         //更新行数
-        int updateNum = userMapper.update(user);
+//        int updateNum = userMapper.update(user);
 
-        if (updateNum == 1) {
+        //mp自带的更新方法，根据id进行更新，没有传值的属性就不会更新
+        int affectRows = userMapper.updateById(user);
+
+        if (affectRows > 0) {
             result.put("result", true);
             result.put("msg", "修改成功！");
         } else {
@@ -142,11 +147,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public Map<String, Object> delete(List<String> ids) {
+    public Map<String, Object> delete(List<Integer> ids) {
         Map<String, Object> result = new HashMap<>();
 
-        int deleteNum = userMapper.delete(ids);
-        if (deleteNum > 0) {
+//        int deleteNum = userMapper.delete(ids);
+
+        //mp自带批量删除
+        int affectRows = userMapper.deleteBatchIds(ids);
+
+        if (affectRows > 0) {
             result.put("result", true);
             result.put("msg", "删除成功！");
         } else {

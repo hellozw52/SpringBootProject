@@ -30,5 +30,5 @@ public interface UserService extends IService<User> {
 
     public Map<String, Object> update(String id, String username, String password);
 
-    public Map<String, Object> delete(List<String> ids);
+    public Map<String, Object> delete(List<Integer> ids);
 }

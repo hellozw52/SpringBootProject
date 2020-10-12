@@ -171,7 +171,7 @@ public class UserController extends BaseController {
     **/
     @ResponseBody
     @RequestMapping("delete")
-    public Map<String, Object> delete(@RequestParam("ids") List<String> ids) {
+    public Map<String, Object> delete(@RequestParam("ids") List<Integer> ids) {
         logger.info("批量删除");
         //返回结果
         map = userService.delete(ids);
