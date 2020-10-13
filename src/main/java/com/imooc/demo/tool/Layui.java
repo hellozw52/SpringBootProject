@@ -4,8 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author Administrator
- */
+ * @Description layui数据接口统一格式
+ * @Author zw
+ * @Date 2020/10/13 14:46
+ * @Param
+ * @Return
+**/
 public class Layui extends HashMap<String, Object> {
 
     public static Layui data(Integer count, List<?> data) {

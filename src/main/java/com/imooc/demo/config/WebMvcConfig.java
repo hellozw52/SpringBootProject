@@ -26,7 +26,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry reg) {
         //默认访问页面
         reg.addViewController("/").setViewName("redirect:/frame.html");
-        reg.setOrder(Ordered.HIGHEST_PRECEDENCE);//最先执行过滤
+        //最先执行过滤
+        reg.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(reg);
     }
 

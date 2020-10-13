@@ -11,9 +11,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-/**
- * @author Administrator
- */
 @SpringBootApplication
 @ServletComponentScan
 @Configuration

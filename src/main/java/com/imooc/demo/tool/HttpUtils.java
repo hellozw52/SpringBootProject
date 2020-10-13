@@ -23,8 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * HTTP post请求
- */
+ * @Description  HTTP post请求
+ * @Author zw
+ * @Date 2020/10/13 14:39
+ * @Param
+ * @Return
+**/
 public class HttpUtils {
 
     public static String doPost(String url, String json) {
@@ -32,12 +36,14 @@ public class HttpUtils {
         JSONObject response = null;
         String result = null;
         try {
-            StringEntity s = new StringEntity(json, "UTF-8"); // 中文乱码在此解决
+            // 中文乱码在此解决
+            StringEntity s = new StringEntity(json, "UTF-8");
             s.setContentType("application/json");
             post.setEntity(s);
             HttpResponse res = HttpClients.createDefault().execute(post);
             if (res.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                result = EntityUtils.toString(res.getEntity());// 返回json格式：
+                // 返回json格式
+                result = EntityUtils.toString(res.getEntity());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,12 +52,12 @@ public class HttpUtils {
     }
 
     /**
-     * post请求
-     *
-     * @param url
-     * @param map
-     * @return
-     */
+     * @Description post请求
+     * @Author zw
+     * @Date 2020/10/13 14:40
+     * @Param [url, map]
+     * @Return java.lang.String
+    **/
     public static String httpPost(String url, Map<String, Object> map) {
         try {
             HttpPost post = new HttpPost(url);
@@ -67,14 +73,12 @@ public class HttpUtils {
             }
             //在这个地方设置编码 防止请求乱码
             post.setEntity(new UrlEncodedFormEntity(params, "utf-8"));
-//            GeneralLog.info(ModelName, "请求url:" + url);
-//            GeneralLog.info(ModelName, "请求数据:" + map);
             CloseableHttpResponse httpResponse = HttpClients.createDefault().execute(post);
-            //System.out.println("返回数据：" + httpResponse);
             String result = null;
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
                 HttpEntity httpEntity = httpResponse.getEntity();
-                result = EntityUtils.toString(httpEntity);// 取出应答字符串
+                // 取出应答字符串
+                result = EntityUtils.toString(httpEntity);
             }
             return result;
         } catch (Exception e) {
@@ -84,13 +88,12 @@ public class HttpUtils {
     }
 
     /**
-     * 设置cookie
-     *
-     * @param cookieKey   键
-     * @param cookieValue 值
-     * @param effectTime  有效时间 秒
-     * @param response
-     */
+     * @Description 设置cookie
+     * @Author zw
+     * @Date 2020/10/13 14:41
+     * @Param [cookieKey, cookieValue, effectTime, response]
+     * @Return void
+    **/
     public static void putCookies(String cookieKey, String cookieValue, int effectTime, HttpServletResponse response) {
         Cookie cookie = new Cookie(cookieKey, cookieValue);
         cookie.setPath("/");// tomcat下多应用共享

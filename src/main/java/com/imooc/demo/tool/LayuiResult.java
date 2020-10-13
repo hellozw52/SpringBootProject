@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 /**
  * @Description 返回给layui的json结果
  * @Author zw
- * @Date 2020/7/22 20:14
+ * @Date 2020/10/13 14:47
  * @Param
  * @Return
 **/
@@ -18,13 +18,13 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class LayuiResult {
 
-    // 响应业务状态
+    //响应业务状态
     private Integer code;
-    // 响应消息
+    //响应消息
     private String msg;
-    // 响应中的数据
+    //响应中的数据
     private Object data;
-    // 数据个数
+    //数据个数
     private Integer count;
 
 

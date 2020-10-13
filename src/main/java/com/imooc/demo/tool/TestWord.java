@@ -3,8 +3,6 @@ package com.imooc.demo.tool;
 import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.config.Configure;
 import com.deepoove.poi.policy.HackLoopTableRenderPolicy;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,6 +11,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @Description 通过poi-tl 根据模板导出word文件
+ * @Author zw
+ * @Date 2020/10/13 14:51
+ * @Param
+ * @Return
+**/
 public class TestWord {
 
     public static void main(String[] args) throws IOException {

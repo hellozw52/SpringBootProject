@@ -24,7 +24,8 @@ public abstract class BaseController {
     protected List<Map<String, Object>> listMap;
     protected int listNum;
     protected Map<String, Object> result;
-    protected Layui layuiResult;//给layui返回的结果
+    // 给layui返回的结果
+    protected Layui layuiResult;
 
     // 各子系统的url地址
     @Value("${systemUrl.casUrl}")

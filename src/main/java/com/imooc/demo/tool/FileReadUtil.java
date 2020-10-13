@@ -5,11 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * @ClassName : FileReadUtil
- * @Description : 读取locationinfo.txt  手机归属地文件  每行数据
- * @Author : ZW
- * @Date: 2020-05-14 14:14
- */
+ * @Description 读取locationinfo.txt手机归属地文件 每行数据
+ * @Author zw
+ * @Date 2020/10/13 14:38
+ * @Param
+ * @Return
+**/
 public class FileReadUtil {
 
 //    public static void main(String[] args) {
@@ -19,15 +20,20 @@ public class FileReadUtil {
 //    }
 
     /**
-     * 读取每行内容 控制台 生成插入的sql语句
-     */
+     * @Description 读取每行内容 控制台 生成插入的sql语句
+     * @Author zw
+     * @Date 2020/10/13 14:38
+     * @Param [filePath]
+     * @Return java.lang.String
+    **/
     public static String read(String filePath) {
         BufferedReader br = null;
         String line = null;
         //StringBuffer buf = new StringBuffer();
         try {
             //根据文件路径创建缓冲输入流
-            br = new BufferedReader(new FileReader(filePath));//filePath中是aaa.txt文件
+            //filePath中是aaa.txt文件
+            br = new BufferedReader(new FileReader(filePath));
             String str = "";
 
             //循环读取文件的每一行，对需要修改的行进行修改，放入缓冲对象中
@@ -44,7 +50,8 @@ public class FileReadUtil {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (br != null) {// 关闭流
+            if (br != null) {
+                // 关闭流
                 try {
                     br.close();
                 } catch (IOException e) {

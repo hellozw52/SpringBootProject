@@ -25,13 +25,13 @@ import java.net.URLEncoder;
  */
 public class CasServerUtil {
 
-    //登录服务器地址
+    // 登录服务器地址
     private static String CAS_SERVER_PATH = "http://192.168.0.39:8080/cas";
 
-    //登录地址的token
+    // 登录地址的token
     private static String GET_TOKEN_URL = CAS_SERVER_PATH + "/v1/tickets";
 
-    //目标返回的服务器的url， 同访问的地址必须完全一致，不然就会报错。
+    // 目标返回的服务器的url， 同访问的地址必须完全一致，不然就会报错。
     private static String TAGET_URL = "http://192.168.0.39:8080/common/";
 //    private static String TAGET_URL = "http://192.168.0.39:8080/common/notice/list?page=1&rows=15";
 
