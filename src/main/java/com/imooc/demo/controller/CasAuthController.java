@@ -26,12 +26,12 @@ public class CasAuthController {
     @Resource
     Environment ymlConfig;//注入配置文件
 
-    //读取yml中 第三方CAS  账号  密码  cas服务路径
+    // 读取yml中 第三方CAS  账号  密码  cas服务路径
     private String USERNAME;
     private String PASSWORD;
     private String CAS_SERVER_PATH;
 
-    //目标返回的服务器的url， 同访问的地址必须完全一致，不然就会报错。
+    // 目标返回的服务器的url， 同访问的地址必须完全一致，不然就会报错。
     private static String TAGET_URL = "";
 
     /**

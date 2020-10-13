@@ -29,10 +29,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Shiro的配置文件
- * @author : xingsongtan@qq.com
- * @date : 20:51 2019/7/18
- */
+ * @Description Shiro的配置文件
+ * @Author zw
+ * @Date 2020/10/13 15:49
+ * @Param
+ * @Return
+**/
 @Configuration
 public class ShiroCasConfiguration {
 

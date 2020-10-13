@@ -8,10 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 记录接口响应时间和结果
- *
- * @author zhaowei
- */
+ * @Description 记录接口响应时间和结果
+ * @Author zw
+ * @Date 2020/10/13 15:47
+ * @Param
+ * @Return
+**/
 @Component
 @Aspect
 public class LogExecTimeAspect {

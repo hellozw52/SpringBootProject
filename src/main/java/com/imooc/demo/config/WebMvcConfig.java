@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * @Description 配置日志拦截器 对接统一日志平台
+ * @Description 配置首页
  * @Author zw
  * @Date 2020/8/6 13:57
  * @Param

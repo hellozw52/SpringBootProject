@@ -16,14 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-/***
- * @description 登录拦截器
- * @author lwh
+/**
+ * @Description 登录拦截器
+ * @Author zw
+ * @Date 2020/10/13 15:51
  * @Param
- * @date 2020/6/23 9:47
- * @return
- * @throws
- */
+ * @Return
+**/
 @Component
 public class LogInterceptor implements HandlerInterceptor {
 

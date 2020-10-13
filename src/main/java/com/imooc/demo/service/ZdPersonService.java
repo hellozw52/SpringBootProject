@@ -17,10 +17,12 @@ import java.util.Map;
 public interface ZdPersonService extends IService<ZdPerson> {
 
     /**
-     * 查询所有账单人员
-     *
-     * @return
-     */
+     * @Description 查询所有账单人员
+     * @Author zw
+     * @Date 2020/10/13 15:53
+     * @Param []
+     * @Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+    **/
     List<Map<String, Object>> listZdPerson();
 
 }

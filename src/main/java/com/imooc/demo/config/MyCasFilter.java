@@ -11,9 +11,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author : xingsongtan@qq.com
- * @date : 14:17 2019/7/17
- */
+ * @Description CAS配置
+ * @Author zw
+ * @Date 2020/10/13 15:48
+ * @Param
+ * @Return
+**/
 public class MyCasFilter extends CasFilter {
 
     private static final String TICKET_PARAMETER = "ticket";
