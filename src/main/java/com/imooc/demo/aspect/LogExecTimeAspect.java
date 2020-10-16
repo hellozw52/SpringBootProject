@@ -5,6 +5,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,8 +15,9 @@ import org.springframework.stereotype.Component;
  * @Param
  * @Return
 **/
-@Component
 @Aspect
+@Component
+@Profile({"dev","test"})
 public class LogExecTimeAspect {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

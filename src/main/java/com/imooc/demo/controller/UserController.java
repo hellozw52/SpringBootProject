@@ -114,6 +114,7 @@ public class UserController extends BaseController {
      * @Param [username, startime, endtime, page, limit, orderField, orderType]
      * @Return com.imooc.demo.tool.LayuiResult
     **/
+    @ExecTime(value = "记录接口结果和时间")
     @ResponseBody
     @RequestMapping("/search")
     public LayuiResult search(

@@ -73,7 +73,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             //插入
 //            userMapper.add(user);
 
-            //采用mp封装好的方法  插入后  影响的行数
+            // 采用mp封装好的方法  插入后  影响的行数
             int affectRows = userMapper.insert(user);
 
             if (affectRows > 0) {
